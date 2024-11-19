@@ -1,13 +1,13 @@
 //
 //  ViewController.swift
-//  proj_ZenThea
+//  proj_ZenThéa
 //
-//  Created by Felix Ton that-Lavarini on 05/11/2024.
+//  Created by Felix Ton that-Lavarini on 19/11/2024.
 //
 
 import UIKit
 
-class MainViewController: UIViewController {
+class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

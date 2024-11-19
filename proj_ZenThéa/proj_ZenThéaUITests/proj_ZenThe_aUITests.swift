@@ -1,13 +1,13 @@
 //
-//  proj_ZenTheaUITests.swift
-//  proj_ZenTheaUITests
+//  proj_ZenThe_aUITests.swift
+//  proj_ZenThéaUITests
 //
-//  Created by Felix Ton that-Lavarini on 05/11/2024.
+//  Created by Felix Ton that-Lavarini on 19/11/2024.
 //
 
 import XCTest
 
-final class proj_ZenTheaUITests: XCTestCase {
+final class proj_ZenThe_aUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

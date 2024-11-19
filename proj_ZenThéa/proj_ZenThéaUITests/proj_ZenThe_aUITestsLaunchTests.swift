@@ -1,13 +1,13 @@
 //
-//  proj_ZenTheaUITestsLaunchTests.swift
-//  proj_ZenTheaUITests
+//  proj_ZenThe_aUITestsLaunchTests.swift
+//  proj_ZenThéaUITests
 //
-//  Created by Felix Ton that-Lavarini on 05/11/2024.
+//  Created by Felix Ton that-Lavarini on 19/11/2024.
 //
 
 import XCTest
 
-final class proj_ZenTheaUITestsLaunchTests: XCTestCase {
+final class proj_ZenThe_aUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
