@@ -35,7 +35,6 @@
                     </view>
                     <connections>
                         <segue destination="WeH-72-1HX" kind="show" id="7XR-lJ-9HP"/>
-                        <segue destination="Yue-z6-1Fu" kind="show" id="ueJ-UV-Du3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -109,7 +108,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Se6-LE-HRf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="910.68702290076328" y="420.42253521126764"/>
+            <point key="canvasLocation" x="929" y="-282"/>
         </scene>
         <!--conversation-->
         <scene sceneID="bzQ-Nv-ZQI">
@@ -125,31 +124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aK8-Ta-e4L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2001" y="420"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="gDZ-MY-vQ9">
-            <objects>
-                <viewController id="Yue-z6-1Fu" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VK4-QR-1aO">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qrq-Nx-Rmg">
-                                <rect key="frame" x="16" y="59" width="160" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="lessthan" catalog="system" title="retour au menu"/>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="tqY-EY-Q5g"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="X1h-nY-EJM"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S1a-nb-DQv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="922.90076335877859" y="-350"/>
+            <point key="canvasLocation" x="2019" y="-282"/>
         </scene>
     </scenes>
     <resources>
@@ -159,13 +134,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

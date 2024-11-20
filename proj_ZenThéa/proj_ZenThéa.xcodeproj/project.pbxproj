@@ -6,6 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8EA3B8152CEE4B5D00BADE7D /* ConversationMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA3B80F2CEE4B5D00BADE7D /* ConversationMO+CoreDataClass.swift */; };
+		8EA3B8162CEE4B5D00BADE7D /* ConversationMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA3B8102CEE4B5D00BADE7D /* ConversationMO+CoreDataProperties.swift */; };
+		8EA3B8172CEE4B5D00BADE7D /* MessageMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA3B8122CEE4B5D00BADE7D /* MessageMO+CoreDataProperties.swift */; };
+		8EA3B8182CEE4B5D00BADE7D /* MessageMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA3B8112CEE4B5D00BADE7D /* MessageMO+CoreDataClass.swift */; };
+		8EA3B8192CEE4B5D00BADE7D /* UtilisateurMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA3B8142CEE4B5D00BADE7D /* UtilisateurMO+CoreDataProperties.swift */; };
+		8EA3B81A2CEE4B5D00BADE7D /* UtilisateurMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA3B8132CEE4B5D00BADE7D /* UtilisateurMO+CoreDataClass.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8E8952FC2CECFB1200F11EE3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +36,12 @@
 		8E8952E22CECFB1100F11EE3 /* proj_ZenThéa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "proj_ZenThéa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E8952FB2CECFB1200F11EE3 /* proj_ZenThéaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "proj_ZenThéaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E8953052CECFB1200F11EE3 /* proj_ZenThéaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "proj_ZenThéaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EA3B80F2CEE4B5D00BADE7D /* ConversationMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8EA3B8102CEE4B5D00BADE7D /* ConversationMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8EA3B8112CEE4B5D00BADE7D /* MessageMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8EA3B8122CEE4B5D00BADE7D /* MessageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8EA3B8132CEE4B5D00BADE7D /* UtilisateurMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UtilisateurMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8EA3B8142CEE4B5D00BADE7D /* UtilisateurMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UtilisateurMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +103,12 @@
 		8E8952D92CECFB1100F11EE3 = {
 			isa = PBXGroup;
 			children = (
+				8EA3B80F2CEE4B5D00BADE7D /* ConversationMO+CoreDataClass.swift */,
+				8EA3B8102CEE4B5D00BADE7D /* ConversationMO+CoreDataProperties.swift */,
+				8EA3B8112CEE4B5D00BADE7D /* MessageMO+CoreDataClass.swift */,
+				8EA3B8122CEE4B5D00BADE7D /* MessageMO+CoreDataProperties.swift */,
+				8EA3B8132CEE4B5D00BADE7D /* UtilisateurMO+CoreDataClass.swift */,
+				8EA3B8142CEE4B5D00BADE7D /* UtilisateurMO+CoreDataProperties.swift */,
 				8E8952E42CECFB1100F11EE3 /* proj_ZenThéa */,
 				8E8952FE2CECFB1200F11EE3 /* proj_ZenThéaTests */,
 				8E8953082CECFB1200F11EE3 /* proj_ZenThéaUITests */,
@@ -249,6 +270,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EA3B8152CEE4B5D00BADE7D /* ConversationMO+CoreDataClass.swift in Sources */,
+				8EA3B8162CEE4B5D00BADE7D /* ConversationMO+CoreDataProperties.swift in Sources */,
+				8EA3B8172CEE4B5D00BADE7D /* MessageMO+CoreDataProperties.swift in Sources */,
+				8EA3B8182CEE4B5D00BADE7D /* MessageMO+CoreDataClass.swift in Sources */,
+				8EA3B8192CEE4B5D00BADE7D /* UtilisateurMO+CoreDataProperties.swift in Sources */,
+				8EA3B81A2CEE4B5D00BADE7D /* UtilisateurMO+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

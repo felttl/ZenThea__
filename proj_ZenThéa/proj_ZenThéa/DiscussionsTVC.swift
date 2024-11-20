@@ -8,9 +8,16 @@
 import UIKit
 
 class DiscussionsTVC: UITableViewController {
+    
+    /// remplissage des données de la vue actuelle par segue de la vue précédente
+    private static var conversations : [ConversationMO] = []
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // <#warning#> charge les conversations dans la variable privée statique
         
         self.tableView.dataSource = self
 
@@ -24,21 +31,21 @@ class DiscussionsTVC: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
+    /// renvoie le nombre de lignes a afficher par le controleur
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return DiscussionsTVC.conversations.count
     }
     
-    /// charge les cellules a chaque iterations
+    /// charge les cellules a chaque iterations du ViewController
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "aDiscussion",
             for: indexPath
         )
+        // <#warning#> récupérations des données de la segue de la view précédente (ConversationVC)
         cell.textLabel!.text = ""
         cell.detailTextLabel!.text = ""
 
@@ -90,4 +97,14 @@ class DiscussionsTVC: UITableViewController {
     }
     */
 
+}
+/// geters & setters
+extension DiscussionsTVC {
+    /// récupère la liste de conversations stockées dans DiscussionTVC
+    public static func getConversations() -> [ConversationMO] {
+        return DiscussionsTVC.conversations
+    }
+    public static func setConversations(_ conv: [ConversationMO]){
+        DiscussionsTVC.conversations = conv
+    }
 }
