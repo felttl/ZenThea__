@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private static var conversations : [AnyObject] = []
     
+    
+    
     public static func getConversations() -> [AnyObject]{
         return AppDelegate.conversations
     }

@@ -103,6 +103,7 @@
                     <connections>
                         <outlet property="date" destination="IU7-3j-ML7" id="ajl-JA-Zyp"/>
                         <outlet property="subTitle" destination="fdn-0z-wqi" id="crD-Tk-QFw"/>
+                        <outlet property="tableView" destination="bA2-Gi-FCp" id="OI5-pe-kVg"/>
                         <outlet property="title_" destination="FEd-ul-Odd" id="MCH-Du-rfw"/>
                     </connections>
                 </viewController>
