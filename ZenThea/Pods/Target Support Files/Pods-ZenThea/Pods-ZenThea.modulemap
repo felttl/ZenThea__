@@ -1,0 +1,6 @@
+framework module Pods_ZenThea {
+  umbrella header "Pods-ZenThea-umbrella.h"
+
+  export *
+  module * { export * }
+}

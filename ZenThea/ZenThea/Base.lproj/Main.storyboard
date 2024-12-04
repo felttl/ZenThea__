@@ -55,10 +55,10 @@
             </objects>
             <point key="canvasLocation" x="-889" y="-127"/>
         </scene>
-        <!--ConversationVC-->
+        <!--Discussion-->
         <scene sceneID="DRO-i3-ykg">
             <objects>
-                <viewController id="p7s-CH-qHJ" customClass="ConversationVC" customModule="ZenThea" sceneMemberID="viewController">
+                <viewController title="Discussion" id="p7s-CH-qHJ" customClass="ConversationVC" customModule="ZenThea" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JRQ-GF-jsL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -87,6 +87,16 @@
                                 <rect key="frame" x="16" y="129" width="361" height="488"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="adO-wN-CEG">
+                                        <rect key="frame" x="0.0" y="50" width="361" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="adO-wN-CEG" id="U0j-I3-ZI7">
+                                            <rect key="frame" x="0.0" y="0.0" width="361" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEd-ul-Odd">
                                 <rect key="frame" x="16" y="48" width="361" height="29"/>

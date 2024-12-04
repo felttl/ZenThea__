@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0D67E7F9D636AF8DDEFF16 /* Pods_ZenTheaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92497C0BBC88E432FF055B80 /* Pods_ZenTheaTests.framework */; };
+		3CF0B2A25A34534BE9A5AC68 /* Pods_ZenThea.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1D842289BE0D1477C01A76 /* Pods_ZenThea.framework */; };
 		8E9DD54F2CEF82BC00E0350A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9DD54E2CEF82BC00E0350A /* CoreData.framework */; };
 		8E9DD6232CEFB84D00E0350A /* ConversationMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DD61D2CEFB84D00E0350A /* ConversationMO+CoreDataClass.swift */; };
 		8E9DD6242CEFB84D00E0350A /* UserMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DD6222CEFB84D00E0350A /* UserMO+CoreDataProperties.swift */; };
@@ -14,6 +16,7 @@
 		8E9DD6262CEFB84D00E0350A /* MessageMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DD61F2CEFB84D00E0350A /* MessageMO+CoreDataClass.swift */; };
 		8E9DD6272CEFB84D00E0350A /* ConversationMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DD61E2CEFB84D00E0350A /* ConversationMO+CoreDataProperties.swift */; };
 		8E9DD6282CEFB84D00E0350A /* UserMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DD6212CEFB84D00E0350A /* UserMO+CoreDataClass.swift */; };
+		E342EF893724DD9EEC68BDFA /* Pods_ZenThea_ZenTheaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C613AB8FB106F2A153F0FEB0 /* Pods_ZenThea_ZenTheaUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1DE34EFEF9B8985D20480D1E /* Pods-ZenTheaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZenTheaTests.release.xcconfig"; path = "Target Support Files/Pods-ZenTheaTests/Pods-ZenTheaTests.release.xcconfig"; sourceTree = "<group>"; };
+		2490BFF540FBE76FD6A3F994 /* Pods-ZenThea-ZenTheaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZenThea-ZenTheaUITests.debug.xcconfig"; path = "Target Support Files/Pods-ZenThea-ZenTheaUITests/Pods-ZenThea-ZenTheaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E9DD5162CEF827100E0350A /* ZenThea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZenThea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9DD52F2CEF827300E0350A /* ZenTheaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenTheaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9DD5392CEF827300E0350A /* ZenTheaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenTheaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +49,13 @@
 		8E9DD6202CEFB84D00E0350A /* MessageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8E9DD6212CEFB84D00E0350A /* UserMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8E9DD6222CEFB84D00E0350A /* UserMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		92497C0BBC88E432FF055B80 /* Pods_ZenTheaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZenTheaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96B35ABD252A97CBB428E130 /* Pods-ZenThea.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZenThea.release.xcconfig"; path = "Target Support Files/Pods-ZenThea/Pods-ZenThea.release.xcconfig"; sourceTree = "<group>"; };
+		B00D2A11AE118EEBD0B50C1A /* Pods-ZenTheaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZenTheaTests.debug.xcconfig"; path = "Target Support Files/Pods-ZenTheaTests/Pods-ZenTheaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BB1D842289BE0D1477C01A76 /* Pods_ZenThea.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZenThea.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C49065C08C7246DB876644E3 /* Pods-ZenThea.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZenThea.debug.xcconfig"; path = "Target Support Files/Pods-ZenThea/Pods-ZenThea.debug.xcconfig"; sourceTree = "<group>"; };
+		C613AB8FB106F2A153F0FEB0 /* Pods_ZenThea_ZenTheaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZenThea_ZenTheaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE53A561B8106A2092C0368B /* Pods-ZenThea-ZenTheaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZenThea-ZenTheaUITests.release.xcconfig"; path = "Target Support Files/Pods-ZenThea-ZenTheaUITests/Pods-ZenThea-ZenTheaUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -67,11 +79,15 @@
 		};
 		8E9DD5322CEF827300E0350A /* ZenTheaTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = ZenTheaTests;
 			sourceTree = "<group>";
 		};
 		8E9DD53C2CEF827300E0350A /* ZenTheaUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = ZenTheaUITests;
 			sourceTree = "<group>";
 		};
@@ -83,6 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E9DD54F2CEF82BC00E0350A /* CoreData.framework in Frameworks */,
+				3CF0B2A25A34534BE9A5AC68 /* Pods_ZenThea.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C0D67E7F9D636AF8DDEFF16 /* Pods_ZenTheaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,12 +115,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E342EF893724DD9EEC68BDFA /* Pods_ZenThea_ZenTheaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		057EE7B1C38681CD5E17397C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C49065C08C7246DB876644E3 /* Pods-ZenThea.debug.xcconfig */,
+				96B35ABD252A97CBB428E130 /* Pods-ZenThea.release.xcconfig */,
+				2490BFF540FBE76FD6A3F994 /* Pods-ZenThea-ZenTheaUITests.debug.xcconfig */,
+				CE53A561B8106A2092C0368B /* Pods-ZenThea-ZenTheaUITests.release.xcconfig */,
+				B00D2A11AE118EEBD0B50C1A /* Pods-ZenTheaTests.debug.xcconfig */,
+				1DE34EFEF9B8985D20480D1E /* Pods-ZenTheaTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		8E9DD50D2CEF827100E0350A = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +150,7 @@
 				8E9DD53C2CEF827300E0350A /* ZenTheaUITests */,
 				8E9DD54D2CEF82BC00E0350A /* Frameworks */,
 				8E9DD5172CEF827100E0350A /* Products */,
+				057EE7B1C38681CD5E17397C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,6 +168,9 @@
 			isa = PBXGroup;
 			children = (
 				8E9DD54E2CEF82BC00E0350A /* CoreData.framework */,
+				BB1D842289BE0D1477C01A76 /* Pods_ZenThea.framework */,
+				C613AB8FB106F2A153F0FEB0 /* Pods_ZenThea_ZenTheaUITests.framework */,
+				92497C0BBC88E432FF055B80 /* Pods_ZenTheaTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -145,6 +182,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E9DD5422CEF827300E0350A /* Build configuration list for PBXNativeTarget "ZenThea" */;
 			buildPhases = (
+				C6BE6BA9FE0A8F2CEDA1306D /* [CP] Check Pods Manifest.lock */,
 				8E9DD5122CEF827100E0350A /* Sources */,
 				8E9DD5132CEF827100E0350A /* Frameworks */,
 				8E9DD5142CEF827100E0350A /* Resources */,
@@ -157,8 +195,6 @@
 				8E9DD5182CEF827100E0350A /* ZenThea */,
 			);
 			name = ZenThea;
-			packageProductDependencies = (
-			);
 			productName = ZenThea;
 			productReference = 8E9DD5162CEF827100E0350A /* ZenThea.app */;
 			productType = "com.apple.product-type.application";
@@ -167,6 +203,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E9DD5472CEF827300E0350A /* Build configuration list for PBXNativeTarget "ZenTheaTests" */;
 			buildPhases = (
+				4C0F6EF06DB91E1659678B7B /* [CP] Check Pods Manifest.lock */,
 				8E9DD52B2CEF827300E0350A /* Sources */,
 				8E9DD52C2CEF827300E0350A /* Frameworks */,
 				8E9DD52D2CEF827300E0350A /* Resources */,
@@ -180,8 +217,6 @@
 				8E9DD5322CEF827300E0350A /* ZenTheaTests */,
 			);
 			name = ZenTheaTests;
-			packageProductDependencies = (
-			);
 			productName = ZenTheaTests;
 			productReference = 8E9DD52F2CEF827300E0350A /* ZenTheaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -190,6 +225,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E9DD54A2CEF827300E0350A /* Build configuration list for PBXNativeTarget "ZenTheaUITests" */;
 			buildPhases = (
+				E86901AF89D430B977D7223C /* [CP] Check Pods Manifest.lock */,
 				8E9DD5352CEF827300E0350A /* Sources */,
 				8E9DD5362CEF827300E0350A /* Frameworks */,
 				8E9DD5372CEF827300E0350A /* Resources */,
@@ -203,8 +239,6 @@
 				8E9DD53C2CEF827300E0350A /* ZenTheaUITests */,
 			);
 			name = ZenTheaUITests;
-			packageProductDependencies = (
-			);
 			productName = ZenTheaUITests;
 			productReference = 8E9DD5392CEF827300E0350A /* ZenTheaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -277,6 +311,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4C0F6EF06DB91E1659678B7B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZenTheaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6BE6BA9FE0A8F2CEDA1306D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZenThea-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E86901AF89D430B977D7223C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZenThea-ZenTheaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8E9DD5122CEF827100E0350A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -323,6 +426,7 @@
 /* Begin XCBuildConfiguration section */
 		8E9DD5432CEF827300E0350A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C49065C08C7246DB876644E3 /* Pods-ZenThea.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -350,6 +454,7 @@
 		};
 		8E9DD5442CEF827300E0350A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96B35ABD252A97CBB428E130 /* Pods-ZenThea.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -496,6 +601,7 @@
 		};
 		8E9DD5482CEF827300E0350A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B00D2A11AE118EEBD0B50C1A /* Pods-ZenTheaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -514,6 +620,7 @@
 		};
 		8E9DD5492CEF827300E0350A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1DE34EFEF9B8985D20480D1E /* Pods-ZenTheaTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -532,6 +639,7 @@
 		};
 		8E9DD54B2CEF827300E0350A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2490BFF540FBE76FD6A3F994 /* Pods-ZenThea-ZenTheaUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -548,6 +656,7 @@
 		};
 		8E9DD54C2CEF827300E0350A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE53A561B8106A2092C0368B /* Pods-ZenThea-ZenTheaUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
