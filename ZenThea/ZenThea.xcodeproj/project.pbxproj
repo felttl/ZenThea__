@@ -59,36 +59,44 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		8E9DD5412CEF827300E0350A /* Exceptions for "ZenThea" folder in "ZenThea" target */ = {
+		98EEE5B62D4938DD0028FB25 /* Exceptions for "ZenThea" folder in "ZenThea" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				ZenThea.xcdatamodeld,
 			);
 			target = 8E9DD5152CEF827100E0350A /* ZenThea */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		8E9DD5182CEF827100E0350A /* ZenThea */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				8E9DD5412CEF827300E0350A /* Exceptions for "ZenThea" folder in "ZenThea" target */,
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		98EEE5B72D4938DD0028FB25 /* Exceptions for "ZenThea" folder in "Compile Sources" phase from "ZenThea" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 8E9DD5122CEF827100E0350A /* Sources */;
+			membershipExceptions = (
+				ZenThea.xcdatamodeld,
 			);
-			path = ZenThea;
-			sourceTree = "<group>";
 		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
 		8E9DD5322CEF827300E0350A /* ZenTheaTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = ZenTheaTests;
 			sourceTree = "<group>";
 		};
 		8E9DD53C2CEF827300E0350A /* ZenTheaUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = ZenTheaUITests;
+			sourceTree = "<group>";
+		};
+		98EEE5A72D4938DD0028FB25 /* ZenThea */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				98EEE5B62D4938DD0028FB25 /* Exceptions for "ZenThea" folder in "ZenThea" target */,
+				98EEE5B72D4938DD0028FB25 /* Exceptions for "ZenThea" folder in "Compile Sources" phase from "ZenThea" target */,
+			);
+			path = ZenThea;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -132,7 +140,6 @@
 				B00D2A11AE118EEBD0B50C1A /* Pods-ZenTheaTests.debug.xcconfig */,
 				1DE34EFEF9B8985D20480D1E /* Pods-ZenTheaTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -145,12 +152,12 @@
 				8E9DD6202CEFB84D00E0350A /* MessageMO+CoreDataProperties.swift */,
 				8E9DD6212CEFB84D00E0350A /* UserMO+CoreDataClass.swift */,
 				8E9DD6222CEFB84D00E0350A /* UserMO+CoreDataProperties.swift */,
-				8E9DD5182CEF827100E0350A /* ZenThea */,
 				8E9DD5322CEF827300E0350A /* ZenTheaTests */,
 				8E9DD53C2CEF827300E0350A /* ZenTheaUITests */,
 				8E9DD54D2CEF82BC00E0350A /* Frameworks */,
 				8E9DD5172CEF827100E0350A /* Products */,
 				057EE7B1C38681CD5E17397C /* Pods */,
+				98EEE5A72D4938DD0028FB25 /* ZenThea */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,13 +193,14 @@
 				8E9DD5122CEF827100E0350A /* Sources */,
 				8E9DD5132CEF827100E0350A /* Frameworks */,
 				8E9DD5142CEF827100E0350A /* Resources */,
+				3C761259D3021D494987E0E8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				8E9DD5182CEF827100E0350A /* ZenThea */,
+				98EEE5A72D4938DD0028FB25 /* ZenThea */,
 			);
 			name = ZenThea;
 			productName = ZenThea;
@@ -229,6 +237,7 @@
 				8E9DD5352CEF827300E0350A /* Sources */,
 				8E9DD5362CEF827300E0350A /* Frameworks */,
 				8E9DD5372CEF827300E0350A /* Resources */,
+				D06D672B3E3A2046B6DE9243 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -312,6 +321,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3C761259D3021D494987E0E8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZenThea/Pods-ZenThea-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZenThea/Pods-ZenThea-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZenThea/Pods-ZenThea-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4C0F6EF06DB91E1659678B7B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -354,6 +380,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D06D672B3E3A2046B6DE9243 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZenThea-ZenTheaUITests/Pods-ZenThea-ZenTheaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZenThea-ZenTheaUITests/Pods-ZenThea-ZenTheaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZenThea-ZenTheaUITests/Pods-ZenThea-ZenTheaUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E86901AF89D430B977D7223C /* [CP] Check Pods Manifest.lock */ = {
