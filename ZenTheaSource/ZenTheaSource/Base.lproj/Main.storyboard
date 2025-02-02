@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--MessagesVC-->
         <scene sceneID="g96-Pc-OSq">
             <objects>
-                <viewController id="pBS-8z-NFS" sceneMemberID="viewController">
+                <viewController id="pBS-8z-NFS" customClass="MessagesVC" customModule="ZenTheaSource" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vg9-mO-QRN">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,6 +32,9 @@
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="juf-fF-GXk" kind="relationship" relationship="rootViewController" id="JfQ-Hd-tch"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6au-rq-ENM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -54,6 +57,10 @@
                         <viewLayoutGuide key="safeArea" id="5mq-y7-xgl"/>
                         <color key="backgroundColor" systemColor="systemMintColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="eU7-8L-5E5"/>
+                    <connections>
+                        <segue destination="pBS-8z-NFS" kind="show" identifier="conv2Messages" id="YU8-2o-llt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YDu-Gt-QP2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

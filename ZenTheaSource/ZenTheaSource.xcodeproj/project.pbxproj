@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		988CDCFB2D4FEBD8007AE772 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 988CDCFA2D4FEBD8007AE772 /* CoreData.framework */; };
-		988CDCFD2D4FEBE5007AE772 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 988CDCFC2D4FEBE5007AE772 /* Messages.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +32,6 @@
 		988CDCDB2D4FEB95007AE772 /* ZenTheaSourceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenTheaSourceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		988CDCE52D4FEB95007AE772 /* ZenTheaSourceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenTheaSourceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		988CDCFA2D4FEBD8007AE772 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		988CDCFC2D4FEBE5007AE772 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -72,7 +70,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				988CDCFD2D4FEBE5007AE772 /* Messages.framework in Frameworks */,
 				988CDCFB2D4FEBD8007AE772 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,7 +115,6 @@
 		988CDCF92D4FEBD8007AE772 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				988CDCFC2D4FEBE5007AE772 /* Messages.framework */,
 				988CDCFA2D4FEBD8007AE772 /* CoreData.framework */,
 			);
 			name = Frameworks;
