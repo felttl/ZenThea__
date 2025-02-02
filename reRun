@@ -1,4 +1,0 @@
-#!bin/bash
-rm -rf Pods Podfile.lock
-pod install --repo-update
-rm -rf ~/Library/Developer/Xcode/DerivedData

@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		988CDCFB2D4FEBD8007AE772 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 988CDCFA2D4FEBD8007AE772 /* CoreData.framework */; };
+		988CDCFD2D4FEBE5007AE772 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 988CDCFC2D4FEBE5007AE772 /* Messages.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		988CDCDC2D4FEB95007AE772 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 988CDCBA2D4FEB93007AE772 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 988CDCC12D4FEB93007AE772;
+			remoteInfo = ZenTheaSource;
+		};
+		988CDCE62D4FEB95007AE772 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 988CDCBA2D4FEB93007AE772 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 988CDCC12D4FEB93007AE772;
+			remoteInfo = ZenTheaSource;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		988CDCC22D4FEB93007AE772 /* ZenTheaSource.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZenTheaSource.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		988CDCDB2D4FEB95007AE772 /* ZenTheaSourceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenTheaSourceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		988CDCE52D4FEB95007AE772 /* ZenTheaSourceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenTheaSourceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		988CDCFA2D4FEBD8007AE772 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		988CDCFC2D4FEBE5007AE772 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		988CDCED2D4FEB95007AE772 /* Exceptions for "ZenTheaSource" folder in "ZenTheaSource" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 988CDCC12D4FEB93007AE772 /* ZenTheaSource */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		988CDCC42D4FEB93007AE772 /* ZenTheaSource */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				988CDCED2D4FEB95007AE772 /* Exceptions for "ZenTheaSource" folder in "ZenTheaSource" target */,
+			);
+			path = ZenTheaSource;
+			sourceTree = "<group>";
+		};
+		988CDCDE2D4FEB95007AE772 /* ZenTheaSourceTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ZenTheaSourceTests;
+			sourceTree = "<group>";
+		};
+		988CDCE82D4FEB95007AE772 /* ZenTheaSourceUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ZenTheaSourceUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		988CDCBF2D4FEB93007AE772 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				988CDCFD2D4FEBE5007AE772 /* Messages.framework in Frameworks */,
+				988CDCFB2D4FEBD8007AE772 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		988CDCD82D4FEB95007AE772 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		988CDCE22D4FEB95007AE772 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		988CDCB92D4FEB93007AE772 = {
+			isa = PBXGroup;
+			children = (
+				988CDCC42D4FEB93007AE772 /* ZenTheaSource */,
+				988CDCDE2D4FEB95007AE772 /* ZenTheaSourceTests */,
+				988CDCE82D4FEB95007AE772 /* ZenTheaSourceUITests */,
+				988CDCF92D4FEBD8007AE772 /* Frameworks */,
+				988CDCC32D4FEB93007AE772 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		988CDCC32D4FEB93007AE772 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				988CDCC22D4FEB93007AE772 /* ZenTheaSource.app */,
+				988CDCDB2D4FEB95007AE772 /* ZenTheaSourceTests.xctest */,
+				988CDCE52D4FEB95007AE772 /* ZenTheaSourceUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		988CDCF92D4FEBD8007AE772 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				988CDCFC2D4FEBE5007AE772 /* Messages.framework */,
+				988CDCFA2D4FEBD8007AE772 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		988CDCC12D4FEB93007AE772 /* ZenTheaSource */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 988CDCEE2D4FEB95007AE772 /* Build configuration list for PBXNativeTarget "ZenTheaSource" */;
+			buildPhases = (
+				988CDCBE2D4FEB93007AE772 /* Sources */,
+				988CDCBF2D4FEB93007AE772 /* Frameworks */,
+				988CDCC02D4FEB93007AE772 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				988CDCC42D4FEB93007AE772 /* ZenTheaSource */,
+			);
+			name = ZenTheaSource;
+			packageProductDependencies = (
+			);
+			productName = ZenTheaSource;
+			productReference = 988CDCC22D4FEB93007AE772 /* ZenTheaSource.app */;
+			productType = "com.apple.product-type.application";
+		};
+		988CDCDA2D4FEB95007AE772 /* ZenTheaSourceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 988CDCF32D4FEB95007AE772 /* Build configuration list for PBXNativeTarget "ZenTheaSourceTests" */;
+			buildPhases = (
+				988CDCD72D4FEB95007AE772 /* Sources */,
+				988CDCD82D4FEB95007AE772 /* Frameworks */,
+				988CDCD92D4FEB95007AE772 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				988CDCDD2D4FEB95007AE772 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				988CDCDE2D4FEB95007AE772 /* ZenTheaSourceTests */,
+			);
+			name = ZenTheaSourceTests;
+			packageProductDependencies = (
+			);
+			productName = ZenTheaSourceTests;
+			productReference = 988CDCDB2D4FEB95007AE772 /* ZenTheaSourceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		988CDCE42D4FEB95007AE772 /* ZenTheaSourceUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 988CDCF62D4FEB95007AE772 /* Build configuration list for PBXNativeTarget "ZenTheaSourceUITests" */;
+			buildPhases = (
+				988CDCE12D4FEB95007AE772 /* Sources */,
+				988CDCE22D4FEB95007AE772 /* Frameworks */,
+				988CDCE32D4FEB95007AE772 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				988CDCE72D4FEB95007AE772 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				988CDCE82D4FEB95007AE772 /* ZenTheaSourceUITests */,
+			);
+			name = ZenTheaSourceUITests;
+			packageProductDependencies = (
+			);
+			productName = ZenTheaSourceUITests;
+			productReference = 988CDCE52D4FEB95007AE772 /* ZenTheaSourceUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		988CDCBA2D4FEB93007AE772 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					988CDCC12D4FEB93007AE772 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					988CDCDA2D4FEB95007AE772 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 988CDCC12D4FEB93007AE772;
+					};
+					988CDCE42D4FEB95007AE772 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 988CDCC12D4FEB93007AE772;
+					};
+				};
+			};
+			buildConfigurationList = 988CDCBD2D4FEB93007AE772 /* Build configuration list for PBXProject "ZenTheaSource" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 988CDCB92D4FEB93007AE772;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 988CDCC32D4FEB93007AE772 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				988CDCC12D4FEB93007AE772 /* ZenTheaSource */,
+				988CDCDA2D4FEB95007AE772 /* ZenTheaSourceTests */,
+				988CDCE42D4FEB95007AE772 /* ZenTheaSourceUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		988CDCC02D4FEB93007AE772 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		988CDCD92D4FEB95007AE772 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		988CDCE32D4FEB95007AE772 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		988CDCBE2D4FEB93007AE772 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		988CDCD72D4FEB95007AE772 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		988CDCE12D4FEB95007AE772 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		988CDCDD2D4FEB95007AE772 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 988CDCC12D4FEB93007AE772 /* ZenTheaSource */;
+			targetProxy = 988CDCDC2D4FEB95007AE772 /* PBXContainerItemProxy */;
+		};
+		988CDCE72D4FEB95007AE772 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 988CDCC12D4FEB93007AE772 /* ZenTheaSource */;
+			targetProxy = 988CDCE62D4FEB95007AE772 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		988CDCEF2D4FEB95007AE772 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ZenTheaSource/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = l3nec.ZenTheaSource;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		988CDCF02D4FEB95007AE772 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ZenTheaSource/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = l3nec.ZenTheaSource;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		988CDCF12D4FEB95007AE772 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		988CDCF22D4FEB95007AE772 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		988CDCF42D4FEB95007AE772 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = l3nec.ZenTheaSourceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZenTheaSource.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ZenTheaSource";
+			};
+			name = Debug;
+		};
+		988CDCF52D4FEB95007AE772 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = l3nec.ZenTheaSourceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZenTheaSource.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ZenTheaSource";
+			};
+			name = Release;
+		};
+		988CDCF72D4FEB95007AE772 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = l3nec.ZenTheaSourceUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ZenTheaSource;
+			};
+			name = Debug;
+		};
+		988CDCF82D4FEB95007AE772 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = l3nec.ZenTheaSourceUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ZenTheaSource;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		988CDCBD2D4FEB93007AE772 /* Build configuration list for PBXProject "ZenTheaSource" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				988CDCF12D4FEB95007AE772 /* Debug */,
+				988CDCF22D4FEB95007AE772 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		988CDCEE2D4FEB95007AE772 /* Build configuration list for PBXNativeTarget "ZenTheaSource" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				988CDCEF2D4FEB95007AE772 /* Debug */,
+				988CDCF02D4FEB95007AE772 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		988CDCF32D4FEB95007AE772 /* Build configuration list for PBXNativeTarget "ZenTheaSourceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				988CDCF42D4FEB95007AE772 /* Debug */,
+				988CDCF52D4FEB95007AE772 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		988CDCF62D4FEB95007AE772 /* Build configuration list for PBXNativeTarget "ZenTheaSourceUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				988CDCF72D4FEB95007AE772 /* Debug */,
+				988CDCF82D4FEB95007AE772 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 988CDCBA2D4FEB93007AE772 /* Project object */;
+}
