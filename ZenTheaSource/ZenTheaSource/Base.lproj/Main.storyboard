@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MessagesVC-->
+        <!--Messages-->
         <scene sceneID="g96-Pc-OSq">
             <objects>
                 <viewController id="pBS-8z-NFS" customClass="MessagesVC" customModule="ZenTheaSource" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,7 +18,7 @@
                         <viewLayoutGuide key="safeArea" id="S7f-6s-dke"/>
                         <color key="backgroundColor" systemColor="systemMintColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Y58-mT-VHb"/>
+                    <navigationItem key="navigationItem" title="Messages" id="Y58-mT-VHb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZ2-fp-ERw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="-384" y="-33"/>
         </scene>
-        <!--View Controller-->
+        <!--Conversations-->
         <scene sceneID="rAv-PI-dbP">
             <objects>
-                <viewController id="juf-fF-GXk" sceneMemberID="viewController">
+                <viewController id="juf-fF-GXk" customClass="ConversationsVC" customModule="ZenTheaSource" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1bG-aN-eUT">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,11 +53,23 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qpw-we-3MN">
+                                <rect key="frame" x="16" y="152" width="131" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bIS-V3-n3h">
+                                <rect key="frame" x="331" y="147.66666666666663" width="46" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5mq-y7-xgl"/>
                         <color key="backgroundColor" systemColor="systemMintColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="eU7-8L-5E5"/>
+                    <navigationItem key="navigationItem" title="Conversations" id="eU7-8L-5E5"/>
                     <connections>
                         <segue destination="pBS-8z-NFS" kind="show" identifier="conv2Messages" id="YU8-2o-llt"/>
                     </connections>
@@ -68,11 +80,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemMintColor">
-            <color red="0.0" green="0.78039215689999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
