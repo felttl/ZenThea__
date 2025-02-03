@@ -8,14 +8,14 @@
 import UIKit
 
 /// actions delegate to perform
-protocol ConversationTVCellDelegate : AnyObject {
-    func onLongClickEdit(int cell:ConversationTVCell)
+protocol MessageTVCellDelegate : AnyObject {
+    func onLongClickRemove(int cell:MessageTVCell)
 }
 
 /// create custom cells
-class ConversationTVCell: UITableViewCell {
+class MessageTVCell: UITableViewCell {
     
-    var delegate : ConversationTVCellDelegate?
+    var delegate : MessageTVCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +25,7 @@ class ConversationTVCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
     
     
 

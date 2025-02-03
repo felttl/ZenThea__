@@ -14,7 +14,19 @@ class UserDAO: Codable {
     
     // MARK: données persistantes
     
-    private static let storageName: String = "jsonUser.json"
+    private static var storageName: String = "jsonUser.json"
+    private static let storageNameS: String = UserDAO.storageName
+    
+    // obligatoire pour les tests unitaires
+    public static func getStorageName()->String{
+        return UserDAO.storageName
+    }
+    public static func setStorageName(_ storageName: String){
+        UserDAO.storageName = storageName
+    }
+    public static func resetStorageName(){
+        UserDAO.storageName=UserDAO.storageNameS
+    }
     
     public static func writeJSON(_ msgs2save: [UserDAO]){
         let fileUrl : URL = UserDAO.getURL()
