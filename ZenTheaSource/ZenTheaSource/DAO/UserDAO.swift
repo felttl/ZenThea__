@@ -38,8 +38,8 @@ class UserDAO: Codable {
     }
     
     /// récupère les données enregistrées en persistant
-    public static func loadJSON() -> User{
-        var msgsDecoded : User
+    public static func loadJSON() -> User?{
+        var msgsDecoded : User?
         do {
             let data = try Data(
                 contentsOf: UserDAO.getURL()

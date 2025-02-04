@@ -25,8 +25,8 @@ func getFormattedDate(_ date : Date? = Date(),_ isLocal:Bool=true)->String{
 /// qui nous intéresse de comparer (uniquement type primitifs)
 /// renvoie l'indice sous un nombre int de la liste
 func rechercheDichotomique(_ list: [AnyObject],_ searchFor: (AnyObject) -> Any)->Int{
-    
+    var res : Int = 0
     
     // a implémenter
-    
+    return res
 }

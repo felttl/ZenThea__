@@ -30,8 +30,8 @@ class Conversation: Codable {
         self.msgs.append(msg)
         self.mid += 1
     }
-    /// supprime un message et renvoie s'il a été trouvé
-    public func removeMessage(_ mid: Int)->Bool{
+    /// supprime un message et renvoie s'il a été trouvé avec son identifian
+    public func removeMessageMid(_ mid: Int)->Bool{
         var found: Bool = false
         if let id = Conversation.getMessageIdx(self.msgs,mid){
             self.msgs.remove(at: id)
@@ -40,8 +40,10 @@ class Conversation: Codable {
         return found
     }
     
-    public static get
-    
+    /// supprime un élément avec un index
+    public func removeMessageIdx(_ idx: Int){
+        self.msgs.remove(at: idx)
+    }
     
     // MARK: getters & setters
 
@@ -49,13 +51,14 @@ class Conversation: Codable {
     public func getMid()->Int{return self.mid}
     public func getTitle()->String{return self.title}
     public func getDate()->Date{return self.date}
-    public func getMsgs()->[Message]{return self.msgspublic static func getCid()->Int{return Conversation.cid}
+    public func getMsgs()->[Message]{return self.msgs}
+    public static func getCid()->Int{return Conversation.cid}
     
     public func setCid(_ cid: Int){self.cid = cid}
     public func setTitle(_ title: String){self.title = title}
     public func setDate(_ date: Date){self.date = date}
     public func setMsgs(_ msgs: [Message]){self.msgs=msgs}
-        public static func setCid(_ cid : Int){Conversation.cid=cid}
+    public static func setCid(_ cid : Int){Conversation.cid=cid}
     
     
     

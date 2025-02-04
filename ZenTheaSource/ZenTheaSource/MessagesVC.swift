@@ -25,6 +25,8 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.user = appDelegate.mediator.getUser()
         self.user = UserDAO.loadJSON()
         /// on enregistre la cellule créer programmatiquement
         tableView.register(
@@ -47,7 +49,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         view.addSubview(tableView)
-        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -122,8 +123,8 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     /// suppression d'un message au clique long
     func onLongClickRemove(int cell: GMessageTVCell) {
-        if let indexPath = tableView.indexPath(for: cell){
-            self.
+        if let indexPath = tableView.indexPath(for: cell), indexPath.row >= 0 && indexPath.row < self.convMsgs.getMsgs().count{
+            self.convMsgs.removeMessageIdx(indexPath.row)
         }
     }
 
@@ -169,7 +170,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.convMsgs.getMsgs().count
     }
-
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
@@ -181,6 +181,24 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             with: msg.getLabel(),
             date: getFormattedDate(msg.getDate())
         )
+        let aspect : CGFloat = 255.0
+        if(msg.getIsReceived()){
+            // blue
+            cell.backgroundColor = UIColor(
+                red: 227.0/aspect,
+                green: 220.0/aspect,
+                blue: 21.0/aspect,
+                alpha: 1.0
+            )
+        } else {
+            // yellow
+            cell.backgroundColor = UIColor(
+                red: 21.0/aspect,
+                green: 129.0/aspect,
+                blue: 227.0/aspect,
+                alpha: 1.0
+            )
+        }
         cell.delegate = self
         return cell
     }

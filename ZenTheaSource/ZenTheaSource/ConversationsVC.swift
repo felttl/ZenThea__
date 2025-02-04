@@ -20,43 +20,54 @@ class ConversationsVC: UIViewController {
     
     /// l'utilisateur crée une conversation
     @IBAction func ajouterConv(_ sender: Any) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.manageUser()
+        var convs : [Conversation] = self.conversations
+        let conv : Conversation = Conversation("inconnu",Date())
+        convs.append(conv)
+        appDelegate.mediator.setConversations(convs)
         self.performSegue(
             withIdentifier: "conv2Messages",
-            sender: <#T##Any?#>
+            sender: conv.getCid()
         )
+    }
+    
+    private func manageUser(){
+        // si l'utilisateur existe ...
+        // si l'utilisateur a modifié l'état de User...
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        var user : User? = appDelegate.mediator.getUser()
+        let sexes : [Sexe] = [Sexe.homme,Sexe.femme,Sexe.autre]
+        if(user == nil){
+            user = User(
+                sexes[self.sexeSC.selectedSegmentIndex]
+            )
+        } else if(self.sexeSC.selectedSegmentIndex != 0){
+            user?.setSexe(sexes[self.sexeSC.selectedSegmentIndex])
+        }
+        appDelegate.mediator.setUser(user!)
     }
     
     /// lorsque l'utilisateur selectionne une cellule on l'envoie dans la liste d'échanges
     /// on sauvegarde également l'état de l'utilisateur et les modification éventielles
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedConv = self.
+        let selectedConv : Conversation = self.conversations[indexPath.row]
+        self.performSegue(
+            withIdentifier: "conv2Messages",
+            sender: selectedConv.getCid()
+        )
     }
 
     /// envoie les données dans une autre view
     /// je rapelle que le prepare récupère le sender utilisé dans un performSegue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "conv2Messages" {
-            if let destinationVC = segue.destination as! MessagesVC{
-                destinationVC.cid = 0
+            if let destinationVC = segue.destination as? MessagesVC{
+                destinationVC.cid = sender as? Int
             }
         } else {
             print("id de segue inconnu (\(segue.identifier!))")
         }
-    }
-    
-    
-    private func testConversations(){
-        self.conversations=[
-            Conversation("msg test",Date(timeIntervalSinceNow: 30)),
-            Conversation("test",Date(timeIntervalSinceNow: 29)),
-            Conversation("test 2", Date(timeIntervalSinceNow: 28)),
-            Conversation("test 3", Date(timeIntervalSinceNow: 27))
-        ]
-    }
-    
-    /// AppDelegate réucupère la liste pour la sauvegarder avant de fermer l'app
-    public func getConversations()->[ConversationDAO]{
-        return self.conversationDAOs
     }
     
 }
@@ -65,7 +76,8 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
     override func viewDidLoad() {
         super.viewDidLoad()
         // on fait un test
-        self.testConversations()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.conversations = appDelegate.mediator.getConversations()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         // affichange de la connexion
@@ -85,44 +97,37 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
     }
 
     
-       /// vérifie que le serveur est connecté a l'application
-       private func isConnected()->Bool{
-           var res : Bool = false
-           // a implémenter
-           return res
-       }
+    /// vérifie que le serveur est connecté a l'application
+    private func isConnected()->Bool{
+       var res : Bool = false
+       // a implémenter
+       return res
+    }
        
-       /// lorsque l'utilisateur clique longtemps dessus il
-       /// peut modifier le titre d'une conversation
-       func onLongClickEdit(int cell: ConversationTVCell) {
-           // a implémenter
-       }
-       
-       
-       // MARK: - Table view data source
+    /// lorsque l'utilisateur clique longtemps dessus il
+    /// peut modifier le titre d'une conversation
+    func onLongClickEdit(in cell: ConversationTVCell) {
+        cell.startEditing()
+    }
 
-       func numberOfSections(in tableView: UITableView) -> Int {
-           return 1
-       }
 
-       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return self.conversationDAOs.count
-       }
+    // MARK: - Table view data source
 
-       
-       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-           let cell = tableView.dequeueReusableCell(
-               withIdentifier: "conversationCell",
-               for: indexPath
-           ) as! ConversationTVCell
-           let conversation = self.conversationDAOs[indexPath.row]
-           cell.dateL.text = getFormattedDate(
-            conversation.getDate()
-           )
-           cell.titleL.text = conversation.getTitle()
-           cell.delegate = self
-           return cell
-       }
-    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.conversations.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+           withIdentifier: "conversationCell",
+           for: indexPath
+        ) as! ConversationTVCell
+        let conversation = self.conversations[indexPath.row]
+        cell.dateL.text = getFormattedDate(conversation.getDate())
+        cell.titleL.text = conversation.getTitle()
+        cell.delegate = self
+        return cell
+    }
+
 }
 
