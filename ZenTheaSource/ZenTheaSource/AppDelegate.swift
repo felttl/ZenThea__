@@ -11,10 +11,13 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    // pour pas a avoir a chaquer toutes les conversation a chaque fois que l'on se déplace de vue
+    public var mediator : Mediator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        self.mediator.setConversations(
+            ConversationDAO.loadJSON()
+        )
         return true
     }
 
@@ -23,12 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// l'app est passé en tache de fond
     func applicationDidEnterBackground(_ application: UIApplication) {
-        ConnexionJsonDoc.save()
+        self.mediator.save()
     }
     
     /// avant la destructiond de l'application
     func applicationWillTerminate(_ application: UIApplication) {
-        ConnexionJsonDoc.save()
+        self.mediator.save()
     }
     
     

@@ -115,6 +115,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
                                     <imageReference key="image" image="plus" catalog="system" symbolScale="large" variableValue="0.0"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="black"/>
                                     <color key="baseForegroundColor" systemColor="systemGreenColor"/>
                                 </buttonConfiguration>
                                 <connections>

@@ -9,6 +9,7 @@ import UIKit
 
 /// actions delegate to perform
 protocol ConversationTVCellDelegate : AnyObject {
+    /// clique long on modifie
     func onLongClickEdit(int cell:ConversationTVCell)
 }
 

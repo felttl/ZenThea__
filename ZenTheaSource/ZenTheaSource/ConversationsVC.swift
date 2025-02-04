@@ -8,29 +8,49 @@
 import UIKit
 
 class ConversationsVC: UIViewController {
-
-    private var conversationDAOs : [ConversationDAO]!
     
     @IBOutlet weak var connectionStateL: UILabel!
     @IBOutlet weak var stateIV: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sexeSC: UISegmentedControl!
     
+    private var conversations : [Conversation]!
+    private var isUserModified : Bool = false
+    private var isMsgsModified : Bool = false
     
+    /// l'utilisateur crée une conversation
     @IBAction func ajouterConv(_ sender: Any) {
         self.performSegue(
-            withIdentifier: <#T##String#>,
+            withIdentifier: "conv2Messages",
             sender: <#T##Any?#>
         )
     }
     
+    /// lorsque l'utilisateur selectionne une cellule on l'envoie dans la liste d'échanges
+    /// on sauvegarde également l'état de l'utilisateur et les modification éventielles
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedConv = self.
+    }
+
+    /// envoie les données dans une autre view
+    /// je rapelle que le prepare récupère le sender utilisé dans un performSegue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "conv2Messages" {
+            if let destinationVC = segue.destination as! MessagesVC{
+                destinationVC.cid = 0
+            }
+        } else {
+            print("id de segue inconnu (\(segue.identifier!))")
+        }
+    }
+    
     
     private func testConversations(){
-        self.conversationDAOs=[
-            ConversationDAO(0,"msg test",Date(timeIntervalSinceNow: 30)),
-            ConversationDAO(1,"test",Date(timeIntervalSinceNow: 29)),
-            ConversationDAO(2, "test 2", Date(timeIntervalSinceNow: 28)),
-            ConversationDAO(3, "test 3", Date(timeIntervalSinceNow: 27))
+        self.conversations=[
+            Conversation("msg test",Date(timeIntervalSinceNow: 30)),
+            Conversation("test",Date(timeIntervalSinceNow: 29)),
+            Conversation("test 2", Date(timeIntervalSinceNow: 28)),
+            Conversation("test 3", Date(timeIntervalSinceNow: 27))
         ]
     }
     

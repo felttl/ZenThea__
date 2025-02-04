@@ -9,11 +9,6 @@ import Foundation
 
 class UserDAO: Codable {
     
-    private static var sexe: Sexe = Sexe.homme
-    private static var connexion : Bool = false
-    
-    // MARK: données persistantes
-    
     private static var storageName: String = "jsonUser.json"
     private static let storageNameS: String = UserDAO.storageName
     
@@ -29,7 +24,7 @@ class UserDAO: Codable {
     }
     
     /// sauvegarde les données en local
-    public static func writeJSON(_ user2save: UserDAO){
+    public static func writeJSON(_ user2save: User){
         let fileUrl : URL = UserDAO.getURL()
         let urlFic = fileUrl.appendingPathComponent(
             UserDAO.storageName
@@ -43,14 +38,14 @@ class UserDAO: Codable {
     }
     
     /// récupère les données enregistrées en persistant
-    public static func loadJSON() -> UserDAO{
-        var msgsDecoded : UserDAO
+    public static func loadJSON() -> User{
+        var msgsDecoded : User
         do {
             let data = try Data(
                 contentsOf: UserDAO.getURL()
             )
             msgsDecoded = try JSONDecoder().decode(
-                [UserDAO].self,
+                [User].self,
                 from: data
             ).first!
         } catch {
