@@ -28,12 +28,13 @@ class UserDAO: Codable {
         UserDAO.storageName=UserDAO.storageNameS
     }
     
-    public static func writeJSON(_ msgs2save: [UserDAO]){
+    /// sauvegarde les données en local
+    public static func writeJSON(_ user2save: UserDAO){
         let fileUrl : URL = UserDAO.getURL()
         let urlFic = fileUrl.appendingPathComponent(
             UserDAO.storageName
         )
-        let data2Save = try? JSONEncoder().encode(msgs2save)
+        let data2Save = try? JSONEncoder().encode(user2save)
         FileManager.default.createFile(
             atPath: urlFic.path,
             contents: data2Save,
@@ -42,8 +43,8 @@ class UserDAO: Codable {
     }
     
     /// récupère les données enregistrées en persistant
-    public static func loadJSON() -> [UserDAO]{
-        var msgsDecoded : [UserDAO] = []
+    public static func loadJSON() -> UserDAO{
+        var msgsDecoded : UserDAO
         do {
             let data = try Data(
                 contentsOf: UserDAO.getURL()
@@ -51,7 +52,7 @@ class UserDAO: Codable {
             msgsDecoded = try JSONDecoder().decode(
                 [UserDAO].self,
                 from: data
-            )
+            ).first!
         } catch {
             print("erreur : \(error)")
         }

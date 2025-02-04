@@ -15,6 +15,9 @@ protocol ConversationTVCellDelegate : AnyObject {
 /// create custom cells
 class ConversationTVCell: UITableViewCell {
     
+    @IBOutlet weak var titleL: UILabel!
+    @IBOutlet weak var dateL: UILabel!
+    
     var delegate : ConversationTVCellDelegate?
 
     override func awakeFromNib() {
@@ -25,7 +28,6 @@ class ConversationTVCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
     
 
 }

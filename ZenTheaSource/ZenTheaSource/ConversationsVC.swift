@@ -9,22 +9,36 @@ import UIKit
 
 class ConversationsVC: UIViewController {
 
-    private var conversations : [Conversation]!
+    private var conversationDAOs : [ConversationDAO]!
     
     @IBOutlet weak var connectionStateL: UILabel!
     @IBOutlet weak var stateIV: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sexeSC: UISegmentedControl!
     
-    private func testConversations(){
-        self.conversations = [
-            Conversation("chatGpt", "manger de l'herbe", 0),
-            Conversation("Claude AI : emission interessant", "commentaire de l'emission interessant", 1),
-            Conversation("abstractionw worlds", "art théorique", 2),
-            Conversation("test de conversation", "msg app", 3)
-        ]
-
+    
+    @IBAction func ajouterConv(_ sender: Any) {
+        self.performSegue(
+            withIdentifier: <#T##String#>,
+            sender: <#T##Any?#>
+        )
     }
+    
+    
+    private func testConversations(){
+        self.conversationDAOs=[
+            ConversationDAO(0,"msg test",Date(timeIntervalSinceNow: 30)),
+            ConversationDAO(1,"test",Date(timeIntervalSinceNow: 29)),
+            ConversationDAO(2, "test 2", Date(timeIntervalSinceNow: 28)),
+            ConversationDAO(3, "test 3", Date(timeIntervalSinceNow: 27))
+        ]
+    }
+    
+    /// AppDelegate réucupère la liste pour la sauvegarder avant de fermer l'app
+    public func getConversations()->[ConversationDAO]{
+        return self.conversationDAOs
+    }
+    
 }
 extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, ConversationTVCellDelegate{
     
@@ -54,7 +68,7 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
        /// vérifie que le serveur est connecté a l'application
        private func isConnected()->Bool{
            var res : Bool = false
-           // code a mettre
+           // a implémenter
            return res
        }
        
@@ -72,7 +86,7 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
        }
 
        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return self.conversations.count
+           return self.conversationDAOs.count
        }
 
        
@@ -81,9 +95,11 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
                withIdentifier: "conversationCell",
                for: indexPath
            ) as! ConversationTVCell
-           let conversation = self.conversations[indexPath.row]
-           cell.textLabel!.text = conversation.getTitle()
-           cell.detailTextLabel!.text = conversation.getSubTitle()
+           let conversation = self.conversationDAOs[indexPath.row]
+           cell.dateL.text = getFormattedDate(
+            conversation.getDate()
+           )
+           cell.titleL.text = conversation.getTitle()
            cell.delegate = self
            return cell
        }

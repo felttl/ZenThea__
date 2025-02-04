@@ -6,20 +6,26 @@
 //
 import UIKit
 
-class MessagesVC: UIViewController {
+class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
-    // données récupérées du controlleur précédent
-    private var messageDAOs : [MessageDAO] = []
+    // pour avoir plus de flexibilité on modifie tout
+    // avec la prog pour avoir toutes les options
+    // que l'assistant/inspecteur ne propose pas
+    private var tableView = UITableView()
+    private var messageInputView = UIView()
+    private var textField = UITextField()
+    private var sendButton = UIButton()
+    private var microphoneButton = UIButton()
     
-    private var msgid: String = "messageCell"
+    // identifiant récupéré du controlleur précédent
+    public var cid : Int!
+    
+    private var msgs: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.msgs = ConnexionJsonDoc.getConnexion().getConversationDAOs().getMessage()
     }
-
-}
-extension MessagesVC: UITableViewDataSource, UITableViewDelegate{
-
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

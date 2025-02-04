@@ -34,22 +34,9 @@
 		988CDCFA2D4FEBD8007AE772 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		988CDCED2D4FEB95007AE772 /* Exceptions for "ZenTheaSource" folder in "ZenTheaSource" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 988CDCC12D4FEB93007AE772 /* ZenTheaSource */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		988CDCC42D4FEB93007AE772 /* ZenTheaSource */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				988CDCED2D4FEB95007AE772 /* Exceptions for "ZenTheaSource" folder in "ZenTheaSource" target */,
-			);
 			path = ZenTheaSource;
 			sourceTree = "<group>";
 		};

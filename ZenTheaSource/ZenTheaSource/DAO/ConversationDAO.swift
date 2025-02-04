@@ -10,38 +10,39 @@ import Foundation
 
 class ConversationDAO : Codable{
     
-    private var cid : Int32
+    private var cid : Int
     private var title: String
     private var date : Date
     
-    private var msgDAO: [MessageDAO] = []
+    private var msgDAOs: [MessageDAO] = []
     
-    init(cit: Int32, title: String, date: Date) {
+    init(_ cit: Int,_ title: String,_ date: Date) {
         self.cid = cit
         self.title = title
         self.date = date
     }
     
-    public func addMessage(_ msgDAO: MessageDAO){
-        self.msgDAO.append(msgDAO)
+    public func addMessage(_ msgDAOs: MessageDAO){
+        self.msgDAOs.append(msgDAOs)
     }
-    public func removeMessage(_ mid: Int32)->Bool{
-        var carry : Bool = false
-        if(self.msgDAO[mid].remove(at: mid)){
-            
-        }
+    public func removeMessage(_ mid: Int)->Bool{
+        var carry: Bool = false
+        
+
         return carry
     }
     
     //MARK: getters & setters
 
-    public func getCit()->Int32{return self.cid}
+    public func getCit()->Int{return self.cid}
     public func getTitle()->String{return self.title}
     public func getDate()->Date{return self.date}
+    public func getMsgDAOs()->[MessageDAO]{return self.msgDAOs}
     
-    public func setCit(_ cit: Int32){self.cid = cit}
+    public func setCit(_ cit: Int){self.cid = cit}
     public func setTitle(_ title: String){self.title = title}
     public func setDate(_ date: Date){self.date = date}
+    public func setMessageDAOs(_ msgDAOs: [MessageDAO]){self.msgDAOs=msgDAOs}
     
     
     // MARK: partie persistance des données
@@ -59,6 +60,31 @@ class ConversationDAO : Codable{
     }
     public static func resetStorageName(){
         ConversationDAO.storageName=ConversationDAO.storageNameS
+    }
+    
+    public static func getConversation(_ convDAOs: [ConversationDAO],_ cid: Int)->ConversationDAO?{
+        var res : ConversationDAO? = nil
+        if convDAOs.count > 1{
+            // recherche dichotomique itérative
+            var carry : Bool = true
+            var i : Int = Int(convDAOs.count/2)
+            var mid : Int = i
+            while carry{
+                if convDAOs[i].cid > cid{
+                    mid /= 2
+                    i += mid
+                } else if convDAOs[i].cid < cid{
+                    mid /= 2
+                    i -= mid
+                } else if mid < 2 {
+                    carry = false
+                } else {
+                    carry = false
+                    res = convDAOs[i]
+                }
+            }
+        }
+        return res
     }
     
     /// sauvegarde les données en persistant
