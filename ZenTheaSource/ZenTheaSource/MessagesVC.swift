@@ -28,6 +28,11 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.user = appDelegate.mediator.getUser()
         self.user = UserDAO.loadJSON()
+        let idx : Int = Conversation.getConversationIdx(
+            appDelegate.mediator.getConversations(),
+            self.cid
+        )!
+        self.convMsgs = appDelegate.mediator.getConversations()[idx]
         /// on enregistre la cellule créer programmatiquement
         tableView.register(
             GMessageTVCell.self,

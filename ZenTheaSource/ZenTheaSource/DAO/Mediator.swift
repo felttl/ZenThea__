@@ -19,7 +19,7 @@ class Mediator{
         self.user = UserDAO.loadJSON()
     }
     
-    public static func getConnexion()->Mediator{
+    public static func getMediator()->Mediator{
         if(instance == nil){
             Mediator.instance = Mediator()
         }
@@ -55,3 +55,5 @@ class Mediator{
     
     
 }
+
+

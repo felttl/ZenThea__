@@ -1,23 +1,35 @@
 //
-//  ViewController.swift
-//  ZenTheaSource
+//  ConversationsVC.swift
+//  ZenThéaSource
 //
-//  Created by felix on 02/02/2025.
+//
 //
 
 import UIKit
 
 class ConversationsVC: UIViewController {
     
+    @IBOutlet weak var sexeSC: UISegmentedControl!
     @IBOutlet weak var connectionStateL: UILabel!
     @IBOutlet weak var stateIV: UIImageView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var sexeSC: UISegmentedControl!
+    
     
     private var conversations : [Conversation]!
     private var isUserModified : Bool = false
     private var isMsgsModified : Bool = false
     
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
     /// l'utilisateur crée une conversation
     @IBAction func ajouterConv(_ sender: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -83,16 +95,13 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         // affichange de la connexion
         if self.isConnected(){
             self.connectionStateL.text = "connected"
-            self.stateIV! = UIImageView(
-                image: UIImage(systemName: "checkmark.circle.fill")
-            )
-            self.stateIV.tintColor = .green
+            self.stateIV.image = UIImage(systemName: "checkmark.circle.fill")
+            self.stateIV.tintColor = .white
         } else {
             self.connectionStateL.text = "disconnected"
-            self.stateIV! = UIImageView(
-                image: UIImage(systemName: "xmark.circle.fill")
-            )
-            self.stateIV.tintColor = .red
+            self.stateIV.image = UIImage(systemName: "xmark.circle.fill")
+            self.stateIV.tintColor = UIColor(red: 0.9, green: 0.4, blue: 0.4, alpha: 1)
+
         }
     }
 
@@ -129,5 +138,11 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         return cell
     }
 
+    
+    
+    
+    
+    
+    
 }
 

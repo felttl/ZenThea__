@@ -2,7 +2,7 @@
 //  ExtNC.swift
 //  ZenThea
 //
-//  Created by felix on 28/01/2025.
+//  Created by felix on 28/12/2024.
 //
 // mettre des settings correct par défaut
 

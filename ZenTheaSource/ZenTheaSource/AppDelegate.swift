@@ -15,14 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public var mediator : Mediator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        self.mediator.setConversations(
-            ConversationDAO.loadJSON()
-        )
+        self.mediator = Mediator.getMediator()
         return true
     }
 
     // MARK: UISceneSession Lifecycle
-
     
     /// l'app est passé en tache de fond
     func applicationDidEnterBackground(_ application: UIApplication) {

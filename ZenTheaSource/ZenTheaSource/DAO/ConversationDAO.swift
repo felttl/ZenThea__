@@ -24,40 +24,6 @@ class ConversationDAO : Codable{
     public static func resetStorageName(){
         ConversationDAO.storageName=ConversationDAO.storageNameS
     }
-
-    
-    //MARK: persistance des données
-    
-    /// sauvegarde les données en persistant
-    public static func writeJSON(_ msgs2save: [Conversation]){
-        let fileUrl : URL = ConversationDAO.getURL()
-        let urlFic = fileUrl.appendingPathComponent(
-            ConversationDAO.storageName
-        )
-        let data2Save = try? JSONEncoder().encode(msgs2save)
-        FileManager.default.createFile(
-            atPath: urlFic.path,
-            contents: data2Save,
-            attributes: nil
-        )
-    }
-    
-    /// récupère les données enregistrées en persistant
-    public static func loadJSON() -> [Conversation]{
-        var msgsDecoded : [Conversation] = []
-        do {
-            let data = try Data(
-                contentsOf: ConversationDAO.getURL()
-            )
-            msgsDecoded = try JSONDecoder().decode(
-                [Conversation].self,
-                from: data
-            )
-        } catch {
-            print("erreur : \(error)")
-        }
-        return msgsDecoded
-    }
     
     private static func getURL()->URL{
         return FileManager.default.urls(
@@ -65,6 +31,51 @@ class ConversationDAO : Codable{
             in: .userDomainMask
         ).first!
     }
+    
+    private static func getFinalPath()->String{
+        let url = ConversationDAO.getURL()
+        return url.appendingPathComponent(
+            ConversationDAO.storageName
+        ).path
+    }
+    
+    /// cherche les données dans les sauvegardes précédentes
+    public static func loadJSON()->[Conversation]{
+        var res : [Conversation] = []
+        let jsonFilePath : String = ConversationDAO.getFinalPath()
+        if FileManager.default.fileExists(atPath: jsonFilePath){
+            res = ConversationDAO.loadJSON(ConversationDAO.getURL())
+        }
+        return res
+    }
+    /// (2e etape) obligatoire car peut renvoyer un élément vide ou une erreur
+    private static func loadJSON(_ url: URL)->[Conversation]{
+        do {
+            let data = try Data(contentsOf: url)
+            var conversations = try JSONDecoder().decode(
+                [Conversation].self,
+                from: data
+            )
+            return conversations
+        } catch {
+            print("error from ConversationDAO.loadJSON: \(error)")
+        }
+        return []
+    }
+    
+    
+    public static func writeJSON(_ liste: [Conversation]) {
+        let jsonUrl = ConversationDAO.getFinalPath()
+        let data2save = try? JSONEncoder().encode(
+            liste
+        )
+        FileManager.default.createFile(
+            atPath: jsonUrl,
+            contents: data2save,
+            attributes: nil
+        )
+    }
+    
 
     
     

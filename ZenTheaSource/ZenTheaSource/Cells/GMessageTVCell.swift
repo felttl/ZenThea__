@@ -22,10 +22,10 @@ class GMessageTVCell: UITableViewCell {
     private let messageL : UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-         label.font = UIFont.systemFont(ofSize: 16)
-         label.textColor = .black
-         label.translatesAutoresizingMaskIntoConstraints = false
-         return label
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
      }()
 
     // label pour afficher la date en bas a droite
