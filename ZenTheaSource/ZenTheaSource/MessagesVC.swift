@@ -26,8 +26,11 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.user = appDelegate.mediator.getUser()
-        self.user = UserDAO.loadJSON()
+        for obj in appDelegate.mediator.getConversations(){
+            print(obj.getCid())
+        }
+        print("cid : \(self.cid!)")
+        self.user = appDelegate.mediator.getUser() ?? User(Sexe.homme)
         let idx : Int = Conversation.getConversationIdx(
             appDelegate.mediator.getConversations(),
             self.cid

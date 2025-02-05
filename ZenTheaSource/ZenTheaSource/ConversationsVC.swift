@@ -19,7 +19,8 @@ class ConversationsVC: UIViewController {
     private var isUserModified : Bool = false
     private var isMsgsModified : Bool = false
     
-
+    
+    
     /*
     // MARK: - Navigation
 
@@ -55,7 +56,7 @@ class ConversationsVC: UIViewController {
                 sexes[self.sexeSC.selectedSegmentIndex]
             )
         } else if(self.sexeSC.selectedSegmentIndex != 0){
-            user?.setSexe(sexes[self.sexeSC.selectedSegmentIndex])
+            user!.setSexe(sexes[self.sexeSC.selectedSegmentIndex])
         }
         appDelegate.mediator.setUser(user!)
     }
@@ -87,7 +88,7 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // on fait un test
+        self.tableView.estimatedRowHeight = 250
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.conversations = appDelegate.mediator.getConversations()
         self.tableView.delegate = self
@@ -100,8 +101,9 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         } else {
             self.connectionStateL.text = "disconnected"
             self.stateIV.image = UIImage(systemName: "xmark.circle.fill")
-            self.stateIV.tintColor = UIColor(red: 0.9, green: 0.4, blue: 0.4, alpha: 1)
-
+            self.stateIV.tintColor = UIColor(
+                red: 0.6, green: 0.3, blue: 0.23, alpha: 1.0
+            )
         }
     }
 
@@ -126,6 +128,10 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         return self.conversations.count
     }
 
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 90  // Hauteur de l'espace entre les cellules
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
            withIdentifier: "conversationCell",
@@ -135,13 +141,28 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         cell.dateL.text = getFormattedDate(conversation.getDate())
         cell.titleL.text = conversation.getTitle()
         cell.delegate = self
+        let spaceView = UIView(frame: CGRect(
+            x: 0, y: cell.contentView.frame.height - 10,
+            width: cell.contentView.frame.width,
+            height: 100)
+        )
+        spaceView.backgroundColor = .clear
+        cell.contentView.addSubview(spaceView)
         return cell
     }
+    
 
     
+    /// Hauteur de la cellule + espace
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
     
-    
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = .clear
+    }
+
+
     
     
 }

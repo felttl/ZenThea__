@@ -39,31 +39,6 @@ class ConversationDAO : Codable{
         ).path
     }
     
-    /// cherche les données dans les sauvegardes précédentes
-    public static func loadJSON()->[Conversation]{
-        var res : [Conversation] = []
-        let jsonFilePath : String = ConversationDAO.getFinalPath()
-        if FileManager.default.fileExists(atPath: jsonFilePath){
-            res = ConversationDAO.loadJSON(ConversationDAO.getURL())
-        }
-        return res
-    }
-    /// (2e etape) obligatoire car peut renvoyer un élément vide ou une erreur
-    private static func loadJSON(_ url: URL)->[Conversation]{
-        do {
-            let data = try Data(contentsOf: url)
-            var conversations = try JSONDecoder().decode(
-                [Conversation].self,
-                from: data
-            )
-            return conversations
-        } catch {
-            print("error from ConversationDAO.loadJSON: \(error)")
-        }
-        return []
-    }
-    
-    
     public static func writeJSON(_ liste: [Conversation]) {
         let jsonUrl = ConversationDAO.getFinalPath()
         let data2save = try? JSONEncoder().encode(
@@ -76,7 +51,39 @@ class ConversationDAO : Codable{
         )
     }
     
-
-    
+    /// cherche les données dans les sauvegardes précédentes
+    public static func loadJSON() throws -> [Conversation]{
+        var res : [Conversation] = []
+        // singleton liste des liens
+        let fManager = FileManager.default
+        // accés a la partie document du conteneur sécurisé
+        let urls = fManager.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        )
+        // ajout de notre chemin a la première url du "document"
+        let urlDuJson = urls.first!.appendingPathComponent(
+            ConversationDAO.storageName
+        )
+        if FileManager.default.fileExists(atPath: urlDuJson.path){
+            res = ConversationDAO.loadJSON(urlDuJson)
+        }
+        return res
+    }
+    /// (2e etape) obligatoire car peut renvoyer un élément vide ou une erreur
+    private static func loadJSON(_ url: URL)->[Conversation]{
+        do {
+            let data = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            let tousLesSites = try decoder.decode(
+                [Conversation].self,
+                from: data
+            )
+            return tousLesSites
+        } catch {
+            print("error: \(error)")
+        }
+        return []
+    }
     
 }

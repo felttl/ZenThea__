@@ -37,34 +37,6 @@ class UserDAO: Codable {
         ).path
     }
     
-    /// cherche les données dans les sauvegardes précédentes
-    public static func loadJSON()->User?{
-        var res : User? = nil
-        let jsonFilePath : String = UserDAO.getFinalPath()
-        if FileManager.default.fileExists(atPath: jsonFilePath){
-            res = UserDAO.loadJSON(UserDAO.getURL())
-        }
-        return res
-    }
-    
-    /// (2e etape) obligatoire car peut renvoyer un élément vide ou une erreur
-    private static func loadJSON(_ url: URL)->User?{
-        var res : User? = nil
-        do {
-            let data = try Data(contentsOf: url)
-            //conversations = ... (bellow)
-            res = try JSONDecoder().decode(
-                User.self,
-                from: data
-            )
-            //return conversations
-        } catch {
-            print("error from UserDAO.loadJSON: \(error)")
-        }
-        return res
-    }
-    
-    
     public static func writeJSON(_ user : User) {
         let jsonUrl = UserDAO.getFinalPath()
         let data2save = try? JSONEncoder().encode(user)
@@ -74,6 +46,37 @@ class UserDAO: Codable {
             attributes: nil
         )
     }
-
+    /// cherche les données dans les sauvegardes précédentes
+    public static func loadJSON() throws -> User?{
+        var res : User?
+        let fManager = FileManager.default
+        let urls = fManager.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        )
+        // ajout de notre chemin a la première url du "document"
+        let urlDuJson = urls.first!.appendingPathComponent(
+            UserDAO.storageName
+        )
+        if FileManager.default.fileExists(atPath: urlDuJson.path){
+            res = UserDAO.loadJSON(urlDuJson)
+        }
+        return res
+    }
+    /// (2e etape) obligatoire car peut renvoyer un élément vide ou une erreur
+    private static func loadJSON(_ url: URL)->User?{
+        do {
+            let data = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            let user = try decoder.decode(
+                User.self,
+                from: data
+            )
+            return user
+        } catch {
+            print("error in UserDAO.LoadJSON(url:?) : \(error)")
+        }
+        return nil
+    }
     
 }

@@ -68,25 +68,18 @@ class Conversation: Codable {
     public static func getConversationIdx(_ convDAOs: [Conversation], _ cid: Int) -> Int? {
         var res : Int? = nil
         if !convDAOs.isEmpty{
-            var left = 0
-            var right = convDAOs.count - 1
+            var i = 0
             var carry : Bool = true
-            while left <= right && carry{
-                let mid = left + (right - left) / 2
-                if convDAOs[mid].cid == cid {
-                    res = mid
+            while i < convDAOs.count && carry{
+                if(convDAOs[i].getCid() == cid){
+                    res = i
                     carry = false
-                } else if convDAOs[mid].cid < cid {
-                    left = mid + 1
-                } else {
-                    right = mid - 1
                 }
+                i+=1
             }
         }
         return res
-    }
-    
-    /// renvoie un index en cherchant une mid de message
+    }    /// renvoie un index en cherchant une mid de message
     /// dans une liste de conversations
     /// avec recherche dichotomique non réccursive
     public static func getMessageIdx(_ msgs: [Message], _ mid: Int) -> Int? {
@@ -109,5 +102,30 @@ class Conversation: Codable {
         }
         return res
     }
+    
+    /// utilise le quickSort pour trier la liste
+    public static func quickSort(_ convs : inout [Conversation])->[Conversation]{
+        if convs.count < 2{
+            return convs
+        } else {
+            let pivot = convs[Int(convs.count)].getCid()
+            var l:[Conversation]=[]
+            var m:[Conversation]=[]
+            var r:[Conversation]=[]
+            for obj in convs{
+                if obj.getCid() < pivot{
+                    l.append(obj)
+                } else if obj.getCid() > pivot{
+                    r.append(obj)
+                } else {
+                    m.append(obj)
+                }
+            }
+            return Conversation.quickSort(&l)+m+Conversation.quickSort(&r)
+        }
+    }
+    
+    
+
 
 }
