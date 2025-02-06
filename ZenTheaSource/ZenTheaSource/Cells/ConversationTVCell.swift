@@ -26,6 +26,7 @@ class ConversationTVCell: UITableViewCell, UITextFieldDelegate {
         super.awakeFromNib()
         self.roundCorner()
         self.titleTF.delegate = self
+        self.titleTF.isHidden = true // désactivé par défaut
         let longPressGsture = UILongPressGestureRecognizer(
             target: self,
             action: #selector(handleLongPress)
@@ -65,6 +66,7 @@ class ConversationTVCell: UITableViewCell, UITextFieldDelegate {
         self.titleL.isHidden = false
         self.titleTF.isHidden = true
         self.titleL.text = self.titleTF.text
+        self.roundCorner()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
