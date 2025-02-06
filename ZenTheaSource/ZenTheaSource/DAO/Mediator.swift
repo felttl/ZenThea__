@@ -13,10 +13,12 @@ class Mediator{
     
     private var conversations: [Conversation]?
     private var user: User?
+    private var daoInformations : DAOInformations
     
     private init() {
         self.conversations = try? ConversationDAO.loadJSON()
         self.user = try? UserDAO.loadJSON()
+        self.daoInformations = DAOInformations.getDAOInformations()
     }
     
     public static func getMediator()->Mediator{

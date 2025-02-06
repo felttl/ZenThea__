@@ -14,7 +14,7 @@
             <objects>
                 <viewController id="DD3-i7-D9e" customClass="MessagesVC" customModule="ZenTheaSource" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mze-cC-iPF">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="7Pf-Om-4Sk"/>
                         <color key="backgroundColor" systemColor="systemMintColor"/>
@@ -139,7 +139,7 @@
                         <outlet property="sexeSC" destination="8UY-Vo-p5k" id="Ovt-my-SWi"/>
                         <outlet property="stateIV" destination="odO-bD-Dfa" id="x66-nB-bFQ"/>
                         <outlet property="tableView" destination="BxP-kl-qJa" id="mkm-xm-uV4"/>
-                        <segue destination="DD3-i7-D9e" kind="presentation" identifier="conv2Messages" id="dZ4-Nk-xUC"/>
+                        <segue destination="DD3-i7-D9e" kind="show" identifier="conv2Messages" id="dZ4-Nk-xUC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zmi-nl-xgB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

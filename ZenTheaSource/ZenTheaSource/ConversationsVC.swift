@@ -93,7 +93,7 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         self.conversations = appDelegate.mediator.getConversations()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        // affichange de la connexion
+        // affichage de la connexion
         if self.isConnected(){
             self.connectionStateL.text = "connected"
             self.stateIV.image = UIImage(systemName: "checkmark.circle.fill")
@@ -107,7 +107,6 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         }
     }
 
-    
     /// vérifie que le serveur est connecté a l'application
     private func isConnected()->Bool{
        var res : Bool = false
@@ -150,8 +149,6 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         cell.contentView.addSubview(spaceView)
         return cell
     }
-    
-
     
     /// Hauteur de la cellule + espace
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

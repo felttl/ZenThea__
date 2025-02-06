@@ -17,7 +17,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     private var sendButton = UIButton()
     private var microphoneButton = UIButton()
     
-    // on récupère la liste des messaged dans une conversation
+    // on récupère la liste des messages dans une conversation
     // envoyé par le controleur précédent
     public var cid : Int!
     public var convMsgs: Conversation!
