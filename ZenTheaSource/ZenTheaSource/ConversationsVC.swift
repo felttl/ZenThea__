@@ -129,6 +129,7 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 90  // Hauteur de l'espace entre les cellules
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -152,7 +153,7 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
     
     /// Hauteur de la cellule + espace
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 45
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -53,7 +53,10 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     private func setupTableView(){
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(
+            UITableViewCell.self,
+            forCellReuseIdentifier: "cell"
+        )
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         view.addSubview(tableView)
@@ -73,7 +76,10 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         view.addSubview(messageInputView)
         
         // Bouton Microphone
-        microphoneButton.setImage(UIImage(systemName: "mic.fill"), for: .normal)
+        microphoneButton.setImage(
+            UIImage(systemName: "mic.fill"),
+            for: .normal
+        )
         microphoneButton.tintColor = .gray
         microphoneButton.translatesAutoresizingMaskIntoConstraints = false
         messageInputView.addSubview(microphoneButton)
@@ -84,9 +90,15 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         textField.translatesAutoresizingMaskIntoConstraints = false
         messageInputView.addSubview(textField)
         // Bouton Envoyer
-        sendButton.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
+        sendButton.setImage(
+            UIImage(systemName: "paperplane.fill"),
+            for: .normal
+        )
         sendButton.tintColor = .blue
-        sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        sendButton.addTarget(self,
+             action: #selector(sendMessage),
+             for: .touchUpInside
+        )
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         messageInputView.addSubview(sendButton)
         
@@ -155,15 +167,29 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     /// tasse les messages vers le bas de la view
     func scrollToBottom() {
         if self.convMsgs.getMsgs().count > 0 {
-            let indexPath = IndexPath(row: self.convMsgs.getMsgs().count - 1, section: 0)
-            tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            let indexPath = IndexPath(
+                row: self.convMsgs.getMsgs().count - 1,
+                section: 0
+            )
+            tableView.scrollToRow(
+                at: indexPath, at: .bottom,
+                animated: true
+            )
         }
     }
     
     /// Gestion du clavier avec animations objc
     func setupKeyboardObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+           selector: #selector(keyboardWillShow(_:)),
+           name: UIResponder.keyboardWillShowNotification,
+           object: nil
+        )
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
     
     /// lorsque la vue disparait (mise en pause/tache de fond ou suppression de l'app)
