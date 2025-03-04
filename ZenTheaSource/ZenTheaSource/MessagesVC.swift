@@ -36,14 +36,14 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             self.cid
         )!
         self.convMsgs = appDelegate.mediator.getConversations()[idx]
-        /// on enregistre la cellule créer programmatiquement
+        // on enregistre la cellule créer programmatiquement
         tableView.register(
             GMessageTVCell.self,
             forCellReuseIdentifier: "MessageTVCellID"
         )
         self.textField.becomeFirstResponder()
-        self.setupTableView()
         self.setupInputView()
+        self.setupTableView()
         self.setupKeyboardObservers()
     }
     
@@ -65,10 +65,10 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         tableView.separatorStyle = .none
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: messageInputView.topAnchor)
         ])
     }
     
@@ -105,27 +105,54 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         )
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         messageInputView.addSubview(sendButton)
-        
         NSLayoutConstraint.activate([
-            messageInputView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-            messageInputView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            messageInputView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            messageInputView.heightAnchor.constraint(equalToConstant: 50),
+            messageInputView.leftAnchor.constraint(
+                equalTo: view.leftAnchor, constant: 10
+            ),
+            messageInputView.rightAnchor.constraint(
+                equalTo: view.rightAnchor, constant: -10
+            ),
+            messageInputView.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10
+            ),
+            messageInputView.heightAnchor.constraint(
+                equalToConstant: 50
+            ),
+            microphoneButton.leftAnchor.constraint(
+                equalTo: messageInputView.leftAnchor, constant: 10
+            ),
+            microphoneButton.centerYAnchor.constraint(
+                equalTo: messageInputView.centerYAnchor),
+            microphoneButton.widthAnchor.constraint(
+                equalToConstant: 30
+            ),
+            microphoneButton.heightAnchor.constraint(
+                equalToConstant: 30
+            ),
+            textField.leftAnchor.constraint(
+                equalTo: microphoneButton.rightAnchor, constant: 10
+            ),
+            textField.centerYAnchor.constraint(
+                equalTo: messageInputView.centerYAnchor
+            ),
+            textField.rightAnchor.constraint(
+                equalTo: sendButton.leftAnchor, constant: -10
+            ),
+            textField.heightAnchor.constraint(
+                equalToConstant: 35
+            ),
             
-            microphoneButton.leftAnchor.constraint(equalTo: messageInputView.leftAnchor, constant: 10),
-            microphoneButton.centerYAnchor.constraint(equalTo: messageInputView.centerYAnchor),
-            microphoneButton.widthAnchor.constraint(equalToConstant: 30),
-            microphoneButton.heightAnchor.constraint(equalToConstant: 30),
-            
-            textField.leftAnchor.constraint(equalTo: microphoneButton.rightAnchor, constant: 10),
-            textField.centerYAnchor.constraint(equalTo: messageInputView.centerYAnchor),
-            textField.rightAnchor.constraint(equalTo: sendButton.leftAnchor, constant: -10),
-            textField.heightAnchor.constraint(equalToConstant: 35),
-            
-            sendButton.rightAnchor.constraint(equalTo: messageInputView.rightAnchor, constant: -10),
-            sendButton.centerYAnchor.constraint(equalTo: messageInputView.centerYAnchor),
-            sendButton.widthAnchor.constraint(equalToConstant: 30),
-            sendButton.heightAnchor.constraint(equalToConstant: 30)
+            sendButton.rightAnchor.constraint(
+                equalTo: messageInputView.rightAnchor, constant: -10),
+            sendButton.centerYAnchor.constraint(
+                equalTo: messageInputView.centerYAnchor
+            ),
+            sendButton.widthAnchor.constraint(
+                equalToConstant: 30
+            ),
+            sendButton.heightAnchor.constraint(
+                equalToConstant: 30
+            )
         ])
     }
     
