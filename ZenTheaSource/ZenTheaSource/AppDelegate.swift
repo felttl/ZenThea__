@@ -23,12 +23,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// l'app est passé en tache de fond
     func applicationDidEnterBackground(_ application: UIApplication) {
-        self.mediator.save()
+        self.mediator.saveBack()
     }
     
-    /// avant la destructiond de l'application
+    /// avant la destruction de l'application
     func applicationWillTerminate(_ application: UIApplication) {
-        self.mediator.save()
+        var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+        // Demande une tâche de fond
+        backgroundTask = application.beginBackgroundTask {
+            // Si le système tue l'app avant la fin, ce bloc est appelé
+            application.endBackgroundTask(backgroundTask)
+            backgroundTask = .invalid
+        }
+        self.mediator.saveMain()
+        // Terminer la tâche en arrière-plan après la sauvegarde
+        application.endBackgroundTask(backgroundTask)
+        backgroundTask = .invalid
     }
     
     

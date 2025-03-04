@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, MessageTVCellDelegate {
+class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     // pour avoir plus de flexibilité on modifie tout
     // avec la prog pour avoir toutes les options
@@ -57,6 +57,10 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             UITableViewCell.self,
             forCellReuseIdentifier: "cell"
         )
+        // supprimer la couleur de fond
+        tableView.backgroundColor = UIColor(
+            hue: 0.0, saturation: 0.0, brightness: 0.0, alpha: 0.0
+        )
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         view.addSubview(tableView)
@@ -70,11 +74,11 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     // créer l'input formattée
     func setupInputView() {
+        // couleur de fond zone de texte
         messageInputView.backgroundColor = .systemGray6
         messageInputView.layer.cornerRadius = 25
         messageInputView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(messageInputView)
-        
         // Bouton Microphone
         microphoneButton.setImage(
             UIImage(systemName: "mic.fill"),
@@ -125,7 +129,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         ])
     }
     
-    
+    /// déplace la selection lorsque l'utilisateur affiche un clavier pour écrire
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
@@ -134,17 +138,22 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             }
         }
     }
-    
+    /// déplace la selection lorsque l'utilisateur a fini d'écrire
     @objc func keyboardWillHide(_ notification: Notification) {
         UIView.animate(withDuration: 0.3) {
             self.view.frame.origin.y = 0
         }
     }
     
-    /// suppression d'un message au clique long
-    func onLongClickRemove(int cell: GMessageTVCell) {
-        if let indexPath = tableView.indexPath(for: cell), indexPath.row >= 0 && indexPath.row < self.convMsgs.getMsgs().count{
+    /// suppression d'un message au swipe horizontal (droite ver gauche)
+    /// cette méthode n'as pas changé depuis plus de 2 ans
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // manière simple de faire une suppression au swipe
+        if editingStyle == .delete{
+            // del dans la db
             self.convMsgs.removeMessageIdx(indexPath.row)
+            // del dans la view
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
 
@@ -196,7 +205,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     /// on sauvegarde la base de données liée a notre fil de discussion
     override func viewWillDisappear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.mediator.save()
+        appDelegate.mediator.saveBack()
     }
     
     // MARK: gestion de la table
@@ -233,7 +242,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
                 alpha: 1.0
             )
         }
-        cell.delegate = self
         return cell
     }
     

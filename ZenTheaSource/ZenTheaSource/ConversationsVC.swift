@@ -74,7 +74,15 @@ class ConversationsVC: UIViewController {
             withIdentifier: "conv2Messages",
             sender: selectedConv.getCid()
         )
+        let cell = tableView.cellForRow(at: indexPath) as! ConversationTVCell
+        cell.backgroundColor = UIColor.gray.withAlphaComponent(0.2)  // Assombrir légèrement
     }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! ConversationTVCell
+        cell.backgroundColor = .clear  // Remettre à la couleur d'origine
+    }
+
 
 
     
@@ -121,11 +129,17 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.conversations.count
     }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 90  // Hauteur de l'espace entre les cellules
-        
+    
+    /// suppression d'une conversation au swipe horizontal (droite ver gauche)
+    /// cette méthode n'as pas changé depuis plus de 2 ans
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // manière simple de faire une suppression au swipe
+        if editingStyle == .delete{
+            self.conversations.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
@@ -136,24 +150,49 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         cell.dateL.text = getFormattedDate(conversation.getDate())
         cell.titleL.text = conversation.getTitle()
         cell.delegate = self
+        cell.selectedBackgroundView = UIView()
+        cell.accessoryType = .none
+        let disclosureImageView = UIImageView(image:
+            UIImage(systemName: "chevron.right")
+        )
+        disclosureImageView.translatesAutoresizingMaskIntoConstraints = false
+        disclosureImageView.tintColor = .systemGray
+        cell.contentView.addSubview(disclosureImageView)
+        NSLayoutConstraint.activate([
+            disclosureImageView.trailingAnchor.constraint(
+                equalTo: cell.contentView.trailingAnchor,
+                constant: -1
+            ),
+            disclosureImageView.centerYAnchor.constraint(
+                equalTo: cell.contentView.centerYAnchor
+            )
+        ])
         let spaceView = UIView(frame: CGRect(
-            x: 0, y: cell.contentView.frame.height - 10,
-            width: cell.contentView.frame.width,
-            height: 100)
+            x: 0, y: 0,
+            width: tableView.frame.width,
+            height: cell.contentView.frame.height)
         )
         spaceView.backgroundColor = .clear
         cell.contentView.addSubview(spaceView)
+        cell.separatorInset = UIEdgeInsets(
+            top: 0, left: 0, bottom: 5, right: 0
+        )
         return cell
     }
     
-    /// Hauteur de la cellule + espace
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 45
-    }
+
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = .clear
     }
+    
+
+
+
+
+    
+
+
 
 
     

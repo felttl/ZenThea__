@@ -7,16 +7,10 @@
 
 import UIKit
 
-/// actions delegate to perform
-protocol MessageTVCellDelegate : AnyObject {
-    /// suppression d'un message au clique long
-    func onLongClickRemove(int cell:GMessageTVCell)
-}
+
 
 /// create custom cells
 class GMessageTVCell: UITableViewCell {
-    
-    public var delegate : MessageTVCellDelegate?
     
     // label pour le message
     private let messageL : UILabel = {
@@ -31,8 +25,8 @@ class GMessageTVCell: UITableViewCell {
     // label pour afficher la date en bas a droite
     private let dateL: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .gray
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textColor = .white
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -41,12 +35,6 @@ class GMessageTVCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
-        addGestureRecognizer(
-            UILongPressGestureRecognizer(
-                target: self,
-                action: #selector(handleLongPress)
-            )
-        )
     }
     
     /// contrainte système a respecter
@@ -103,10 +91,6 @@ class GMessageTVCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    /// récupère l'evenement sur clique long
-    @objc private func handleLongPress() {
-        self.delegate?.onLongClickRemove(int: self)
-    }
     
     
     
