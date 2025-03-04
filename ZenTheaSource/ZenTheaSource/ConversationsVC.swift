@@ -20,16 +20,9 @@ class ConversationsVC: UIViewController {
     private var isMsgsModified : Bool = false
     
     
-    
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     /// l'utilisateur crée une conversation
     @IBAction func ajouterConv(_ sender: Any) {
@@ -43,6 +36,18 @@ class ConversationsVC: UIViewController {
             withIdentifier: "conv2Messages",
             sender: conv.getCid()
         )
+    }
+    
+    /// envoie les données dans une autre view
+    /// je rapelle que le prepare récupère le sender utilisé dans un performSegue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "conv2Messages" {
+            if let destinationVC = segue.destination as? MessagesVC{
+                destinationVC.cid = sender as? Int
+            }
+        } else {
+            print("id de segue inconnu (\(segue.identifier!))")
+        }
     }
     
     private func manageUser(){
@@ -71,17 +76,7 @@ class ConversationsVC: UIViewController {
         )
     }
 
-    /// envoie les données dans une autre view
-    /// je rapelle que le prepare récupère le sender utilisé dans un performSegue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "conv2Messages" {
-            if let destinationVC = segue.destination as? MessagesVC{
-                destinationVC.cid = sender as? Int
-            }
-        } else {
-            print("id de segue inconnu (\(segue.identifier!))")
-        }
-    }
+
     
 }
 extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, ConversationTVCellDelegate{
