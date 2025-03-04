@@ -26,12 +26,12 @@ class ConversationTVCell: UITableViewCell, UITextFieldDelegate {
         super.awakeFromNib()
         self.roundCorner()
         self.titleTF.delegate = self
-        self.titleTF.isHidden = true // désactivé par défaut
-        let longPressGsture = UILongPressGestureRecognizer(
+        self.stopEditing() // désactivé par défaut
+        let longPressGR = UILongPressGestureRecognizer(
             target: self,
             action: #selector(handleLongPress)
         )
-        self.addGestureRecognizer(longPressGsture)
+        self.addGestureRecognizer(longPressGR)
     }
     
     override func layoutSubviews() {

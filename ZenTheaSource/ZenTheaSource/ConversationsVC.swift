@@ -20,16 +20,9 @@ class ConversationsVC: UIViewController {
     private var isMsgsModified : Bool = false
     
     
-    
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     /// l'utilisateur crée une conversation
     @IBAction func ajouterConv(_ sender: Any) {
@@ -43,6 +36,18 @@ class ConversationsVC: UIViewController {
             withIdentifier: "conv2Messages",
             sender: conv.getCid()
         )
+    }
+    
+    /// envoie les données dans une autre view
+    /// je rapelle que le prepare récupère le sender utilisé dans un performSegue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "conv2Messages" {
+            if let destinationVC = segue.destination as? MessagesVC{
+                destinationVC.cid = sender as? Int
+            }
+        } else {
+            print("id de segue inconnu (\(segue.identifier!))")
+        }
     }
     
     private func manageUser(){
@@ -69,19 +74,17 @@ class ConversationsVC: UIViewController {
             withIdentifier: "conv2Messages",
             sender: selectedConv.getCid()
         )
+        let cell = tableView.cellForRow(at: indexPath) as! ConversationTVCell
+        cell.backgroundColor = UIColor.gray.withAlphaComponent(0.2)  // Assombrir légèrement
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! ConversationTVCell
+        cell.backgroundColor = .clear  // Remettre à la couleur d'origine
     }
 
-    /// envoie les données dans une autre view
-    /// je rapelle que le prepare récupère le sender utilisé dans un performSegue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "conv2Messages" {
-            if let destinationVC = segue.destination as? MessagesVC{
-                destinationVC.cid = sender as? Int
-            }
-        } else {
-            print("id de segue inconnu (\(segue.identifier!))")
-        }
-    }
+
+
     
 }
 extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, ConversationTVCellDelegate{
@@ -93,7 +96,7 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         self.conversations = appDelegate.mediator.getConversations()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        // affichange de la connexion
+        // affichage de la connexion
         if self.isConnected(){
             self.connectionStateL.text = "connected"
             self.stateIV.image = UIImage(systemName: "checkmark.circle.fill")
@@ -107,7 +110,6 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         }
     }
 
-    
     /// vérifie que le serveur est connecté a l'application
     private func isConnected()->Bool{
        var res : Bool = false
@@ -127,10 +129,17 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.conversations.count
     }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 90  // Hauteur de l'espace entre les cellules
+    
+    /// suppression d'une conversation au swipe horizontal (droite ver gauche)
+    /// cette méthode n'as pas changé depuis plus de 2 ans
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // manière simple de faire une suppression au swipe
+        if editingStyle == .delete{
+            self.conversations.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
@@ -141,26 +150,49 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         cell.dateL.text = getFormattedDate(conversation.getDate())
         cell.titleL.text = conversation.getTitle()
         cell.delegate = self
+        cell.selectedBackgroundView = UIView()
+        cell.accessoryType = .none
+        let disclosureImageView = UIImageView(image:
+            UIImage(systemName: "chevron.right")
+        )
+        disclosureImageView.translatesAutoresizingMaskIntoConstraints = false
+        disclosureImageView.tintColor = .systemGray
+        cell.contentView.addSubview(disclosureImageView)
+        NSLayoutConstraint.activate([
+            disclosureImageView.trailingAnchor.constraint(
+                equalTo: cell.contentView.trailingAnchor,
+                constant: -1
+            ),
+            disclosureImageView.centerYAnchor.constraint(
+                equalTo: cell.contentView.centerYAnchor
+            )
+        ])
         let spaceView = UIView(frame: CGRect(
-            x: 0, y: cell.contentView.frame.height - 10,
-            width: cell.contentView.frame.width,
-            height: 100)
+            x: 0, y: 0,
+            width: tableView.frame.width,
+            height: cell.contentView.frame.height)
         )
         spaceView.backgroundColor = .clear
         cell.contentView.addSubview(spaceView)
+        cell.separatorInset = UIEdgeInsets(
+            top: 0, left: 0, bottom: 5, right: 0
+        )
         return cell
     }
     
 
     
-    /// Hauteur de la cellule + espace
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
-    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = .clear
     }
+    
+
+
+
+
+    
+
+
 
 
     

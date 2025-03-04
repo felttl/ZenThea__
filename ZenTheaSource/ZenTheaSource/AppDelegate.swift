@@ -23,19 +23,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// l'app est passé en tache de fond
     func applicationDidEnterBackground(_ application: UIApplication) {
-        self.mediator.save()
+        self.mediator.saveBack()
     }
     
-    /// avant la destructiond de l'application
+    /// avant la destruction de l'application
     func applicationWillTerminate(_ application: UIApplication) {
-        self.mediator.save()
+        var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+        // Demande une tâche de fond
+        backgroundTask = application.beginBackgroundTask {
+            // Si le système tue l'app avant la fin, ce bloc est appelé
+            application.endBackgroundTask(backgroundTask)
+            backgroundTask = .invalid
+        }
+        self.mediator.saveMain()
+        // Terminer la tâche en arrière-plan après la sauvegarde
+        application.endBackgroundTask(backgroundTask)
+        backgroundTask = .invalid
     }
     
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        return UISceneConfiguration(
+            name: "Default Configuration",
+            sessionRole: connectingSceneSession.role
+        )
     }
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {

@@ -4,6 +4,7 @@
 //
 //  Created by felix on 04/02/2025.
 //
+import Dispatch
 
 /// singleton de "connexion" permettant de synchroniser les données entre
 /// chaque vues (ici 1 seul objet qui est une liste de conversations)
@@ -13,10 +14,12 @@ class Mediator{
     
     private var conversations: [Conversation]?
     private var user: User?
+    private var daoInformations : DAOInformations
     
     private init() {
         self.conversations = try? ConversationDAO.loadJSON()
         self.user = try? UserDAO.loadJSON()
+        self.daoInformations = DAOInformations.getDAOInformations()
     }
     
     public static func getMediator()->Mediator{
@@ -25,13 +28,29 @@ class Mediator{
         }
         return Mediator.instance!
     }
-    
-    public func save(){
-        if self.conversations != nil {
-            ConversationDAO.writeJSON(self.conversations!)
+    // fonction appelé pour la savegarde en tache de fond
+    public func saveBack(){ // thread séparé
+        // sauvearde asynchrone
+        DispatchQueue.global(qos: .background).async {
+            if self.conversations != nil {
+                ConversationDAO.writeJSON(self.conversations!)
+            }
+            if self.user != nil {
+                UserDAO.writeJSON(self.user!)
+            }
         }
-        if self.user != nil {
-            UserDAO.writeJSON(self.user!)
+    }
+    /// fonction qui doit être appelé lors de la destruction/fermeture de l'app
+    public func saveMain(){ // thread principal
+        // sauvearde asynchrone
+        
+        DispatchQueue.main.async {
+            if self.conversations != nil {
+                ConversationDAO.writeJSON(self.conversations!)
+            }
+            if self.user != nil {
+                UserDAO.writeJSON(self.user!)
+            }
         }
     }
     

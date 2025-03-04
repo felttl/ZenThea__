@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, MessageTVCellDelegate {
+class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     // pour avoir plus de flexibilité on modifie tout
     // avec la prog pour avoir toutes les options
@@ -17,7 +17,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     private var sendButton = UIButton()
     private var microphoneButton = UIButton()
     
-    // on récupère la liste des messaged dans une conversation
+    // on récupère la liste des messages dans une conversation
     // envoyé par le controleur précédent
     public var cid : Int!
     public var convMsgs: Conversation!
@@ -36,14 +36,14 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             self.cid
         )!
         self.convMsgs = appDelegate.mediator.getConversations()[idx]
-        /// on enregistre la cellule créer programmatiquement
+        // on enregistre la cellule créer programmatiquement
         tableView.register(
             GMessageTVCell.self,
             forCellReuseIdentifier: "MessageTVCellID"
         )
         self.textField.becomeFirstResponder()
-        self.setupTableView()
         self.setupInputView()
+        self.setupTableView()
         self.setupKeyboardObservers()
     }
     
@@ -53,27 +53,37 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     private func setupTableView(){
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(
+            UITableViewCell.self,
+            forCellReuseIdentifier: "cell"
+        )
+        // supprimer la couleur de fond
+        tableView.backgroundColor = UIColor(
+            hue: 0.0, saturation: 0.0, brightness: 0.0, alpha: 0.0
+        )
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: messageInputView.topAnchor)
         ])
     }
     
     // créer l'input formattée
     func setupInputView() {
+        // couleur de fond zone de texte
         messageInputView.backgroundColor = .systemGray6
         messageInputView.layer.cornerRadius = 25
         messageInputView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(messageInputView)
-        
         // Bouton Microphone
-        microphoneButton.setImage(UIImage(systemName: "mic.fill"), for: .normal)
+        microphoneButton.setImage(
+            UIImage(systemName: "mic.fill"),
+            for: .normal
+        )
         microphoneButton.tintColor = .gray
         microphoneButton.translatesAutoresizingMaskIntoConstraints = false
         messageInputView.addSubview(microphoneButton)
@@ -84,36 +94,69 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         textField.translatesAutoresizingMaskIntoConstraints = false
         messageInputView.addSubview(textField)
         // Bouton Envoyer
-        sendButton.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
+        sendButton.setImage(
+            UIImage(systemName: "paperplane.fill"),
+            for: .normal
+        )
         sendButton.tintColor = .blue
-        sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        sendButton.addTarget(self,
+             action: #selector(sendMessage),
+             for: .touchUpInside
+        )
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         messageInputView.addSubview(sendButton)
-        
         NSLayoutConstraint.activate([
-            messageInputView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-            messageInputView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            messageInputView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            messageInputView.heightAnchor.constraint(equalToConstant: 50),
+            messageInputView.leftAnchor.constraint(
+                equalTo: view.leftAnchor, constant: 10
+            ),
+            messageInputView.rightAnchor.constraint(
+                equalTo: view.rightAnchor, constant: -10
+            ),
+            messageInputView.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10
+            ),
+            messageInputView.heightAnchor.constraint(
+                equalToConstant: 50
+            ),
+            microphoneButton.leftAnchor.constraint(
+                equalTo: messageInputView.leftAnchor, constant: 10
+            ),
+            microphoneButton.centerYAnchor.constraint(
+                equalTo: messageInputView.centerYAnchor),
+            microphoneButton.widthAnchor.constraint(
+                equalToConstant: 30
+            ),
+            microphoneButton.heightAnchor.constraint(
+                equalToConstant: 30
+            ),
+            textField.leftAnchor.constraint(
+                equalTo: microphoneButton.rightAnchor, constant: 10
+            ),
+            textField.centerYAnchor.constraint(
+                equalTo: messageInputView.centerYAnchor
+            ),
+            textField.rightAnchor.constraint(
+                equalTo: sendButton.leftAnchor, constant: -10
+            ),
+            textField.heightAnchor.constraint(
+                equalToConstant: 35
+            ),
             
-            microphoneButton.leftAnchor.constraint(equalTo: messageInputView.leftAnchor, constant: 10),
-            microphoneButton.centerYAnchor.constraint(equalTo: messageInputView.centerYAnchor),
-            microphoneButton.widthAnchor.constraint(equalToConstant: 30),
-            microphoneButton.heightAnchor.constraint(equalToConstant: 30),
-            
-            textField.leftAnchor.constraint(equalTo: microphoneButton.rightAnchor, constant: 10),
-            textField.centerYAnchor.constraint(equalTo: messageInputView.centerYAnchor),
-            textField.rightAnchor.constraint(equalTo: sendButton.leftAnchor, constant: -10),
-            textField.heightAnchor.constraint(equalToConstant: 35),
-            
-            sendButton.rightAnchor.constraint(equalTo: messageInputView.rightAnchor, constant: -10),
-            sendButton.centerYAnchor.constraint(equalTo: messageInputView.centerYAnchor),
-            sendButton.widthAnchor.constraint(equalToConstant: 30),
-            sendButton.heightAnchor.constraint(equalToConstant: 30)
+            sendButton.rightAnchor.constraint(
+                equalTo: messageInputView.rightAnchor, constant: -10),
+            sendButton.centerYAnchor.constraint(
+                equalTo: messageInputView.centerYAnchor
+            ),
+            sendButton.widthAnchor.constraint(
+                equalToConstant: 30
+            ),
+            sendButton.heightAnchor.constraint(
+                equalToConstant: 30
+            )
         ])
     }
     
-    
+    /// déplace la selection lorsque l'utilisateur affiche un clavier pour écrire
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
@@ -122,17 +165,22 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             }
         }
     }
-    
+    /// déplace la selection lorsque l'utilisateur a fini d'écrire
     @objc func keyboardWillHide(_ notification: Notification) {
         UIView.animate(withDuration: 0.3) {
             self.view.frame.origin.y = 0
         }
     }
     
-    /// suppression d'un message au clique long
-    func onLongClickRemove(int cell: GMessageTVCell) {
-        if let indexPath = tableView.indexPath(for: cell), indexPath.row >= 0 && indexPath.row < self.convMsgs.getMsgs().count{
+    /// suppression d'un message au swipe horizontal (droite ver gauche)
+    /// cette méthode n'as pas changé depuis plus de 2 ans
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // manière simple de faire une suppression au swipe
+        if editingStyle == .delete{
+            // del dans la db
             self.convMsgs.removeMessageIdx(indexPath.row)
+            // del dans la view
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
 
@@ -155,22 +203,36 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     /// tasse les messages vers le bas de la view
     func scrollToBottom() {
         if self.convMsgs.getMsgs().count > 0 {
-            let indexPath = IndexPath(row: self.convMsgs.getMsgs().count - 1, section: 0)
-            tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            let indexPath = IndexPath(
+                row: self.convMsgs.getMsgs().count - 1,
+                section: 0
+            )
+            tableView.scrollToRow(
+                at: indexPath, at: .bottom,
+                animated: true
+            )
         }
     }
     
     /// Gestion du clavier avec animations objc
     func setupKeyboardObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+           selector: #selector(keyboardWillShow(_:)),
+           name: UIResponder.keyboardWillShowNotification,
+           object: nil
+        )
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
     
     /// lorsque la vue disparait (mise en pause/tache de fond ou suppression de l'app)
     /// on sauvegarde la base de données liée a notre fil de discussion
     override func viewWillDisappear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.mediator.save()
+        appDelegate.mediator.saveBack()
     }
     
     // MARK: gestion de la table
@@ -207,7 +269,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
                 alpha: 1.0
             )
         }
-        cell.delegate = self
         return cell
     }
     
