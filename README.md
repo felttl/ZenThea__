@@ -18,5 +18,6 @@ projet de bot conversationnel avec un LLM distant (serveur)
 - Singleton pour la connexion (obligatoire dés que l'on a une BD (maintenabilité))
 - DAO pour cécrocher la partie données de la base de données (obligatoire (maintenabilité))
 
+### autres informations
 
 - LLM
