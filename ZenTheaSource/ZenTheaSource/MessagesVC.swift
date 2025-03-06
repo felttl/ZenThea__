@@ -5,8 +5,9 @@
 //  Created by felix on 02/12/2024.
 //
 import UIKit
+import Speech // .plist+: Privacy - Speech Recognition Usage Description
 
-class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, SFSpeechRecognizerDelegate {
     
     // pour avoir plus de flexibilité on modifie tout
     // avec la prog pour avoir toutes les options
@@ -15,14 +16,21 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     private var messageInputView = UIView()
     private var textField = UITextField()
     private var sendButton = UIButton()
+    // microphone part
     private var microphoneButton = UIButton()
+    private var speechRecognizer: SFSpeechRecognizer?
+    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var recognitionTask: SFSpeechRecognitionTask?
+    private var audioEngine: AVAudioEngine?
     
     // on récupère la liste des messages dans une conversation
     // envoyé par le controleur précédent
     public var cid : Int!
     public var convMsgs: Conversation!
+    
     private var user : User!
     private var convIdx : Int?
+    private var isRecording:Bool=false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +40,29 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             appDelegate.mediator.getConversations(),
             self.cid
         )!
+        // Configuration du microphoneButton
+        microphoneButton = UIButton(type: .system)
+        microphoneButton.addTarget(
+            self, action: #selector(startListening), for: .touchUpInside
+        )
+        view.addSubview(microphoneButton)
+        // Initialisation du SFSpeechRecognizer
+        speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "fr_FR"))
+        speechRecognizer?.delegate = self
+        // Vérification de la disponibilité du reconnaisseur vocal
+        SFSpeechRecognizer.requestAuthorization { authStatus in
+            OperationQueue.main.addOperation {
+                switch authStatus {
+                case .authorized:
+                    self.microphoneButton.isEnabled = true
+                case .denied, .restricted, .notDetermined:
+                    self.microphoneButton.isEnabled = false
+                    self.showAudioError("La reconnaissance vocale est désactivée.")
+                default:
+                    break
+                }
+            }
+        }
         // sort messages
         self.loadMessages()
         // on enregistre la cellule créer programmatiquement
@@ -43,6 +74,125 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         self.setupInputView()
         self.setupTableView()
         self.setupKeyboardObservers()
+    }
+    
+    /// Fonction pour démarrer l'enregistrement et la reconnaissance vocale
+    @objc func startListening() {
+        self.isRecording = !self.isRecording
+        if !self.isRecording {
+            self.stopRecording()
+            return // guard clause
+        }
+
+        if recognitionTask != nil {
+            recognitionTask?.cancel()
+            recognitionTask = nil
+        }
+        // Vérification si le microphone est prêt
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("Erreur de configuration de l'audio: \(error.localizedDescription)")
+            return
+        }
+
+        // Création de la requête de reconnaissance vocale
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+
+        // Initialisation de l'AVAudioEngine
+        audioEngine = AVAudioEngine()
+
+        // Connexion du microphone à l'audio engine
+        let inputNode = audioEngine!.inputNode
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
+            self.recognitionRequest?.append(buffer)
+        }
+
+        audioEngine!.prepare()
+        do {
+            try audioEngine!.start()
+        } catch {
+            print("Erreur lors du démarrage de l'enregistrement: \(error.localizedDescription)")
+            return
+        }
+
+        // Commencer la reconnaissance vocale
+        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest!) { result, error in
+            if let error = error {
+                self.showAudioError("Erreur de reconnaissance: \(error.localizedDescription)")
+                return
+            }
+
+            if let result = result {
+                let bestTranscription = result.bestTranscription.formattedString
+                print("Texte reconnu : \(bestTranscription)")
+            }
+        }
+        
+    }
+    
+    func startRecording() {
+        microphoneButton.setImage(
+            UIImage(systemName: "record.circle"),
+            for: .normal
+    )
+    if recognitionTask != nil {
+       recognitionTask?.cancel()
+       recognitionTask = nil
+    }
+
+    // Vérification si le microphone est prêt
+    let audioSession = AVAudioSession.sharedInstance()
+    do {
+       try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+       try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+    } catch {
+       print("Erreur de configuration de l'audio: \(error.localizedDescription)")
+       return
+    }
+    recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+    audioEngine = AVAudioEngine()
+    let inputNode = audioEngine!.inputNode
+    let recordingFormat = inputNode.outputFormat(forBus: 0)
+    inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
+       self.recognitionRequest?.append(buffer)
+    }
+    audioEngine!.prepare()
+    do {
+       try audioEngine!.start()
+    } catch {
+       print("Erreur lors du démarrage de l'enregistrement: \(error.localizedDescription)")
+       return
+    }
+}
+    
+    /// arrêter l'enregistrement
+    func stopRecording() {
+        audioEngine?.stop()
+        recognitionRequest?.endAudio()
+        recognitionTask?.cancel()
+        microphoneButton.setImage(
+            UIImage(systemName: "mic.fill"),
+            for: .normal
+        )
+    }
+
+    private func showAudioError(_ message: String) {
+        let alertController = UIAlertController(
+            title: "Erreur",
+            message: message,
+            preferredStyle: .alert
+        )
+        alertController.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .default
+            )
+        )
+        present(alertController, animated: true)
     }
     
     private func loadMessages(){
