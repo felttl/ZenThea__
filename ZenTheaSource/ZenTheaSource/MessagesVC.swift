@@ -27,10 +27,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        for obj in appDelegate.mediator.getConversations(){
-            print(obj.getCid())
-        }
-        print("cid : \(self.cid!)")
         self.user = appDelegate.mediator.getUser()
         self.convIdx = Conversation.getConversationIdx(
             appDelegate.mediator.getConversations(),
@@ -52,21 +48,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     private func loadMessages(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.convMsgs = appDelegate.mediator.getConversations()[self.convIdx!]
-        // ajout test
-        var msg : Message = Message(
-            self.convMsgs.getCid(),
-            self.convMsgs.getMid(),
-            "\(self.convMsgs.getCid())   \(self.convMsgs.getMid())",
-            Date(),true
-        )
-        self.convMsgs.addMessage(msg)
-        msg = Message(
-            self.convMsgs.getCid(),
-            self.convMsgs.getMid(),
-            "\(self.convMsgs.getCid())   \(self.convMsgs.getMid())",
-            Date(),false
-        )
-        self.convMsgs.addMessage(msg)
         let msgs : [Message] = Message.sortByDate(
             self.convMsgs.getMsgs()
         )
@@ -230,9 +211,16 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
                     text,Date(),false
                 )
             )
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            var convs = appDelegate.mediator.getConversations()
+            convs[self.convIdx!] = self.convMsgs
+            appDelegate.mediator.setConversations(convs)
+            appDelegate.mediator.save()
+            // Ajout de la nouvelle ligne au tableau
+            let newIndexPath = IndexPath(row: self.convMsgs.getMsgs().count - 1, section: 0)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
         textField.text = ""
-        tableView.reloadData()
         scrollToBottom()
     }
     
@@ -292,21 +280,34 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
                 blue: 237.0/safeRatio,
                 alpha: 1.0
             )
-            cell.messageL.textAlignment = .left
-        } else {
-            // yellow
+            NSLayoutConstraint.activate([
+                cell.bubbleImageView.leadingAnchor.constraint(
+                    equalTo: cell.contentView.leadingAnchor, constant: 15)
+            ])
+        } else { // gauche
+            // orange
             color = UIColor(
-                red: 204.0/safeRatio,
-                green: 204.0/safeRatio,
-                blue: 0.0/safeRatio,
+                red: 186.0/safeRatio,
+                green: 114.0/safeRatio,
+                blue: 6.0/safeRatio,
                 alpha: 1.0
             )
-            cell.messageL.textAlignment = .right
+            // Positionner la bulle à droite
+            NSLayoutConstraint.activate([
+                cell.bubbleImageView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -15)
+            ])
+            
         }
-        print(msg.getIsReceived())
-        cell.backgroundColor = color!
-        cell.tintColor = color!
-        cell.selectionStyle = .default
+        // 70% largeur max
+        NSLayoutConstraint.activate([
+            cell.bubbleImageView.widthAnchor.constraint(
+                equalTo: cell.contentView.widthAnchor, multiplier: 0.7
+            )
+        ])
+        cell.backgroundColor = .clear
+        cell.bubbleImageView.backgroundColor = color!
+        //cell.tintColor = color!
+        cell.selectionStyle = .none
         
         return cell
     }

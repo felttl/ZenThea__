@@ -12,6 +12,16 @@ import UIKit
 /// create custom cells
 class GMessageTVCell: UITableViewCell {
     
+    // Bulle de message
+    public let bubbleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 15
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleToFill
+        return imageView
+    }()
+    
     // label pour le message
     public let messageL : UILabel = {
         let label = UILabel()
@@ -26,7 +36,7 @@ class GMessageTVCell: UITableViewCell {
     private let dateL: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -44,35 +54,29 @@ class GMessageTVCell: UITableViewCell {
     
     /// créer une View correcte pour notre message
     private func setupViews() {
-        contentView.addSubview(self.messageL)
-        contentView.addSubview(self.dateL)
-        // contraites pour avoir les éléments au bon endroit
+        // ajout des éléments au bon endroit
+        contentView.addSubview(bubbleImageView)
+        bubbleImageView.addSubview(messageL)
+        bubbleImageView.addSubview(dateL)
+        // Contraintes pour la bulle
         NSLayoutConstraint.activate([
-            self.messageL.topAnchor.constraint(
-                equalTo: contentView.topAnchor,
-                constant: 10
-            ),
-            self.messageL.leadingAnchor.constraint(
-                equalTo: contentView.leadingAnchor,
-                constant: 15
-            ),
-            self.messageL.trailingAnchor.constraint(
-                equalTo: contentView.trailingAnchor,
-                constant: -15
-            ),
-            self.dateL.topAnchor.constraint(
-                equalTo: self.messageL.bottomAnchor,
-                constant: 5
-            ),
-            self.dateL.trailingAnchor.constraint(
-                equalTo: contentView.trailingAnchor,
-                constant: -15
-            ),
-            self.dateL.bottomAnchor.constraint(
-                equalTo: contentView.bottomAnchor,
-                constant: -10
-            )
+            bubbleImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            bubbleImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            bubbleImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.7)
         ])
+
+        // Contraintes pour le message et la date dans la bulle
+        NSLayoutConstraint.activate([
+            messageL.topAnchor.constraint(equalTo: bubbleImageView.topAnchor, constant: 10),
+            messageL.leadingAnchor.constraint(equalTo: bubbleImageView.leadingAnchor, constant: 10),
+            messageL.trailingAnchor.constraint(equalTo: bubbleImageView.trailingAnchor, constant: -10),
+
+            dateL.topAnchor.constraint(equalTo: messageL.bottomAnchor, constant: 5),
+            dateL.leadingAnchor.constraint(equalTo: bubbleImageView.leadingAnchor, constant: 10),
+            dateL.trailingAnchor.constraint(equalTo: bubbleImageView.trailingAnchor, constant: -10),
+            dateL.bottomAnchor.constraint(equalTo: bubbleImageView.bottomAnchor, constant: -10)
+        ])
+        
     }
     
     func configure(with message: String, date: String) {
