@@ -12,14 +12,14 @@ class Mediator{
     
     private static var instance : Mediator? = nil
     
+    private var staticInfos : InformationsDAO?
     private var conversations: [Conversation]?
     private var user: User?
-    private var daoInformations : DAOInformations
     
     private init() {
         self.conversations = try? ConversationDAO.loadJSON()
-        self.user = try? UserDAO.loadJSON()
-        self.daoInformations = DAOInformations.getDAOInformations()
+        self.user = try? UserDAO.loadJSON() ?? User(Sexe.homme)
+        self.staticInfos = InformationsDAO.loadInfos()
     }
     
     public static func getMediator()->Mediator{
@@ -29,7 +29,7 @@ class Mediator{
         return Mediator.instance!
     }
     // fonction appelé pour la savegarde en tache de fond
-    public func saveBack(){ // thread séparé
+    public func save(){ // thread séparé
         // sauvearde asynchrone
         DispatchQueue.global(qos: .background).async {
             if self.conversations != nil {
@@ -38,26 +38,16 @@ class Mediator{
             if self.user != nil {
                 UserDAO.writeJSON(self.user!)
             }
-        }
-    }
-    /// fonction qui doit être appelé lors de la destruction/fermeture de l'app
-    public func saveMain(){ // thread principal
-        // sauvearde asynchrone
-        
-        DispatchQueue.main.async {
-            if self.conversations != nil {
-                ConversationDAO.writeJSON(self.conversations!)
-            }
-            if self.user != nil {
-                UserDAO.writeJSON(self.user!)
-            }
+            self.staticInfos!.setConvAutoIncrement(
+                Conversation.getCid()
+            )
         }
     }
     
     //MARK: getters & setters
     
-    public func getUser()->User?{
-        return self.user
+    public func getUser()->User{
+        return self.user!
     }
     public func setUser(_ user: User){
         self.user=user

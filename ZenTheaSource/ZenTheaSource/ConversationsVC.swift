@@ -15,7 +15,7 @@ class ConversationsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     
-    private var conversations : [Conversation]!
+    public var conversations : [Conversation]!
     private var isUserModified : Bool = false
     private var isMsgsModified : Bool = false
     
@@ -27,15 +27,19 @@ class ConversationsVC: UIViewController {
     /// l'utilisateur crée une conversation
     @IBAction func ajouterConv(_ sender: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.manageUser()
         var convs : [Conversation] = self.conversations
-        let conv : Conversation = Conversation("inconnu",Date())
-        convs.append(conv)
+        let conv : Conversation = Conversation(
+            "nouvelle conversation",
+            Date()
+        )
+        convs.insert(conv, at: 0)
         appDelegate.mediator.setConversations(convs)
+        appDelegate.mediator.save()
         self.performSegue(
             withIdentifier: "conv2Messages",
             sender: conv.getCid()
         )
+        Conversation.setCid(Conversation.getCid()+1)
     }
     
     /// envoie les données dans une autre view
@@ -50,21 +54,6 @@ class ConversationsVC: UIViewController {
         }
     }
     
-    private func manageUser(){
-        // si l'utilisateur existe ...
-        // si l'utilisateur a modifié l'état de User...
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        var user : User? = appDelegate.mediator.getUser()
-        let sexes : [Sexe] = [Sexe.homme,Sexe.femme,Sexe.autre]
-        if(user == nil){
-            user = User(
-                sexes[self.sexeSC.selectedSegmentIndex]
-            )
-        } else if(self.sexeSC.selectedSegmentIndex != 0){
-            user!.setSexe(sexes[self.sexeSC.selectedSegmentIndex])
-        }
-        appDelegate.mediator.setUser(user!)
-    }
     
     /// lorsque l'utilisateur selectionne une cellule on l'envoie dans la liste d'échanges
     /// on sauvegarde également l'état de l'utilisateur et les modification éventielles
@@ -83,11 +72,27 @@ class ConversationsVC: UIViewController {
         cell.backgroundColor = .clear  // Remettre à la couleur d'origine
     }
 
+    
+    /// lorsque l'utilisateur clique sur le segmented control
+    @IBAction func onChangeSex(_ sender: Any, forEvent event: UIEvent) {
+        // si l'utilisateur existe ...
+        // si l'utilisateur a modifié l'état de User...
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let user : User = appDelegate.mediator.getUser()
+        let sexes : [Sexe] = [Sexe.homme,Sexe.femme,Sexe.autre]
+        if(self.sexeSC.selectedSegmentIndex != 0){
+            user.setSexe(sexes[self.sexeSC.selectedSegmentIndex])
+            appDelegate.mediator.setUser(user)
+        }
 
-
+    }
+    
+    
     
 }
 extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, ConversationTVCellDelegate{
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,11 +103,11 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         self.tableView.dataSource = self
         // affichage de la connexion
         if self.isConnected(){
-            self.connectionStateL.text = "connected"
+            self.connectionStateL.text = "connecté"
             self.stateIV.image = UIImage(systemName: "checkmark.circle.fill")
             self.stateIV.tintColor = .white
         } else {
-            self.connectionStateL.text = "disconnected"
+            self.connectionStateL.text = "déconnecté"
             self.stateIV.image = UIImage(systemName: "xmark.circle.fill")
             self.stateIV.tintColor = UIColor(
                 red: 0.6, green: 0.3, blue: 0.23, alpha: 1.0
@@ -116,13 +121,20 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
        // a implémenter
        return res
     }
-       
+
     /// lorsque l'utilisateur clique longtemps dessus il
     /// peut modifier le titre d'une conversation
     func onLongClickEdit(in cell: ConversationTVCell) {
         cell.startEditing()
     }
 
+    // lorsque l'utilisateur a fini de modifier le titre
+    func onFinishEditing(in cell: ConversationTVCell) {
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.mediator.setConversations(self.conversations)
+//        appDelegate.mediator.save()
+        print("onFinishEditing() called")
+    }
 
     // MARK: - Table view data source
 
@@ -137,6 +149,9 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         if editingStyle == .delete{
             self.conversations.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.mediator.setConversations(self.conversations)
+            appDelegate.mediator.save()
         }
     }
 

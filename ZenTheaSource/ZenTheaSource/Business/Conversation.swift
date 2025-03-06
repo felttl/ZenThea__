@@ -26,7 +26,7 @@ class Conversation: Codable {
         self.date = date
     }
     
-    public func addMessageDAO(_ msg: Message){
+    public func addMessage(_ msg: Message){
         self.msgs.append(msg)
         self.mid += 1
     }
@@ -52,12 +52,14 @@ class Conversation: Codable {
     public func getTitle()->String{return self.title}
     public func getDate()->Date{return self.date}
     public func getMsgs()->[Message]{return self.msgs}
+    
     public static func getCid()->Int{return Conversation.cid}
     
     public func setCid(_ cid: Int){self.cid = cid}
     public func setTitle(_ title: String){self.title = title}
     public func setDate(_ date: Date){self.date = date}
     public func setMsgs(_ msgs: [Message]){self.msgs=msgs}
+    
     public static func setCid(_ cid : Int){Conversation.cid=cid}
     
     
@@ -107,22 +109,21 @@ class Conversation: Codable {
     public static func quickSort(_ convs : inout [Conversation])->[Conversation]{
         if convs.count < 2{
             return convs
-        } else {
-            let pivot = convs[Int(convs.count)].getCid()
-            var l:[Conversation]=[]
-            var m:[Conversation]=[]
-            var r:[Conversation]=[]
-            for obj in convs{
-                if obj.getCid() < pivot{
-                    l.append(obj)
-                } else if obj.getCid() > pivot{
-                    r.append(obj)
-                } else {
-                    m.append(obj)
-                }
-            }
-            return Conversation.quickSort(&l)+m+Conversation.quickSort(&r)
         }
+        let pivot = convs[Int(convs.count)].getCid()
+        var l:[Conversation]=[]
+        var m:[Conversation]=[]
+        var r:[Conversation]=[]
+        for obj in convs{
+            if obj.getCid() < pivot{
+                l.append(obj)
+            } else if obj.getCid() > pivot{
+                r.append(obj)
+            } else {
+                m.append(obj)
+            }
+        }
+        return Conversation.quickSort(&l)+m+Conversation.quickSort(&r)
     }
     
     

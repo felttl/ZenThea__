@@ -22,20 +22,18 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     public var cid : Int!
     public var convMsgs: Conversation!
     private var user : User!
+    private var convIdx : Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        for obj in appDelegate.mediator.getConversations(){
-            print(obj.getCid())
-        }
-        print("cid : \(self.cid!)")
-        self.user = appDelegate.mediator.getUser() ?? User(Sexe.homme)
-        let idx : Int = Conversation.getConversationIdx(
+        self.user = appDelegate.mediator.getUser()
+        self.convIdx = Conversation.getConversationIdx(
             appDelegate.mediator.getConversations(),
             self.cid
         )!
-        self.convMsgs = appDelegate.mediator.getConversations()[idx]
+        // sort messages
+        self.loadMessages()
         // on enregistre la cellule créer programmatiquement
         tableView.register(
             GMessageTVCell.self,
@@ -47,30 +45,19 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         self.setupKeyboardObservers()
     }
     
+    private func loadMessages(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.convMsgs = appDelegate.mediator.getConversations()[self.convIdx!]
+        let msgs : [Message] = Message.sortByDate(
+            self.convMsgs.getMsgs()
+        )
+        self.convMsgs.setMsgs(msgs)
+
+    }
+    
     //MARK: préparation de la vue
     
-    /// créer un table view
-    private func setupTableView(){
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(
-            UITableViewCell.self,
-            forCellReuseIdentifier: "cell"
-        )
-        // supprimer la couleur de fond
-        tableView.backgroundColor = UIColor(
-            hue: 0.0, saturation: 0.0, brightness: 0.0, alpha: 0.0
-        )
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorStyle = .none
-        view.addSubview(tableView)
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: messageInputView.topAnchor)
-        ])
-    }
+
     
     // créer l'input formattée
     func setupInputView() {
@@ -156,6 +143,29 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         ])
     }
     
+    /// créer un table view
+    private func setupTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(
+            UITableViewCell.self,
+            forCellReuseIdentifier: "cell"
+        )
+        // supprimer la couleur de fond
+        tableView.backgroundColor = UIColor(
+            hue: 0.0, saturation: 0.0, brightness: 0.0, alpha: 0.0
+        )
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        view.addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: messageInputView.topAnchor)
+        ])
+    }
+    
     /// déplace la selection lorsque l'utilisateur affiche un clavier pour écrire
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
@@ -181,22 +191,36 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             self.convMsgs.removeMessageIdx(indexPath.row)
             // del dans la view
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            var convs = appDelegate.mediator.getConversations()
+            convs[self.convIdx!] = self.convMsgs
+            appDelegate.mediator.setConversations(convs)
+            appDelegate.mediator.save()
         }
     }
+    
+
 
     /// fonction pour envoyer le message dans la view de manière interactive en objc
     @objc func sendMessage() {
         if let text : String = textField.text, !text.isEmpty {
-            self.convMsgs.addMessageDAO(
+            self.convMsgs.addMessage(
                 Message(
                     self.convMsgs.getCid(),
                     self.convMsgs.getMid(),
                     text,Date(),false
                 )
             )
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            var convs = appDelegate.mediator.getConversations()
+            convs[self.convIdx!] = self.convMsgs
+            appDelegate.mediator.setConversations(convs)
+            appDelegate.mediator.save()
+            // Ajout de la nouvelle ligne au tableau
+            let newIndexPath = IndexPath(row: self.convMsgs.getMsgs().count - 1, section: 0)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
         textField.text = ""
-        tableView.reloadData()
         scrollToBottom()
     }
     
@@ -228,12 +252,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         )
     }
     
-    /// lorsque la vue disparait (mise en pause/tache de fond ou suppression de l'app)
-    /// on sauvegarde la base de données liée a notre fil de discussion
-    override func viewWillDisappear(_ animated: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.mediator.saveBack()
-    }
     
     // MARK: gestion de la table
 
@@ -251,24 +269,46 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             with: msg.getLabel(),
             date: getFormattedDate(msg.getDate())
         )
-        let aspect : CGFloat = 255.0
+        let ratio : CGFloat = 255.0
+        let safeRatio = ratio == 0 ? 1 : ratio // Évite la division par zéro
+        var color : UIColor?
         if(msg.getIsReceived()){
             // blue
-            cell.backgroundColor = UIColor(
-                red: 227.0/aspect,
-                green: 220.0/aspect,
-                blue: 21.0/aspect,
+            color = UIColor(
+                red: 66.0/safeRatio,
+                green: 92.0/safeRatio,
+                blue: 237.0/safeRatio,
                 alpha: 1.0
             )
-        } else {
-            // yellow
-            cell.backgroundColor = UIColor(
-                red: 21.0/aspect,
-                green: 129.0/aspect,
-                blue: 227.0/aspect,
+            NSLayoutConstraint.activate([
+                cell.bubbleImageView.leadingAnchor.constraint(
+                    equalTo: cell.contentView.leadingAnchor, constant: 15)
+            ])
+        } else { // gauche
+            // orange
+            color = UIColor(
+                red: 186.0/safeRatio,
+                green: 114.0/safeRatio,
+                blue: 6.0/safeRatio,
                 alpha: 1.0
             )
+            // Positionner la bulle à droite
+            NSLayoutConstraint.activate([
+                cell.bubbleImageView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -15)
+            ])
+            
         }
+        // 70% largeur max
+        NSLayoutConstraint.activate([
+            cell.bubbleImageView.widthAnchor.constraint(
+                equalTo: cell.contentView.widthAnchor, multiplier: 0.7
+            )
+        ])
+        cell.backgroundColor = .clear
+        cell.bubbleImageView.backgroundColor = color!
+        //cell.tintColor = color!
+        cell.selectionStyle = .none
+        
         return cell
     }
     

@@ -58,6 +58,10 @@
                                     <segment title="femme"/>
                                     <segment title="autre"/>
                                 </segments>
+                                <connections>
+                                    <action selector="onChangeSex:" destination="olw-YS-RcY" eventType="valueChanged" id="ciI-M3-emp"/>
+                                    <action selector="onChangeSex:forEvent:" destination="olw-YS-RcY" eventType="valueChanged" id="VA7-Zv-TIm"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HB7-ho-o2m">
                                 <rect key="frame" x="195" y="180" width="34" height="34"/>
