@@ -13,7 +13,7 @@ import UIKit
 class GMessageTVCell: UITableViewCell {
     
     // label pour le message
-    private let messageL : UILabel = {
+    public let messageL : UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 16)
@@ -26,7 +26,7 @@ class GMessageTVCell: UITableViewCell {
     private let dateL: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.textColor = .white
+        label.textColor = .black
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

@@ -22,6 +22,29 @@ class Message: Codable{
         self.isReceived = isReceived
     }
     
+    /// utilise le quickSort pour trier la liste
+    public static func sortByDate(_ convs : [Message])->[Message]{
+        if convs.count < 2{
+            return convs
+        }
+        let pivot = convs[Int((convs.count-1)/2)].getDate()
+        var l:[Message]=[]
+        var m:[Message]=[]
+        var r:[Message]=[]
+        var currentD : Date
+        for obj in convs{
+            currentD = obj.getDate()
+            if currentD > pivot{
+                r.append(obj)
+            } else if currentD < pivot{
+                l.append(obj)
+            } else {
+                m.append(obj)
+            }
+        }
+        return Message.sortByDate(l)+m+Message.sortByDate(r)
+    }
+    
     //MARK: getters & setters
 
     public func getCid()->Int{return self.cid}
@@ -35,5 +58,7 @@ class Message: Codable{
     public func setTitle(_ title: String){self.label = title}
     public func setDate(_ date: Date){self.date = date}
     public func setIsReceived(_ isReceived: Bool){self.isReceived=isReceived}
+    
+    
     
 }

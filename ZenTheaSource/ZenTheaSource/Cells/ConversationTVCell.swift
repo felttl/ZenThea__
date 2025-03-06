@@ -11,6 +11,7 @@ import UIKit
 protocol ConversationTVCellDelegate : AnyObject {
     /// clique long on modifie
     func onLongClickEdit(in cell:ConversationTVCell)
+    func onFinishEditing(in cell:ConversationTVCell)
 }
 
 /// create custom cells
@@ -67,9 +68,11 @@ class ConversationTVCell: UITableViewCell, UITextFieldDelegate {
         self.titleTF.isHidden = true
         self.titleL.text = self.titleTF.text
         self.roundCorner()
+        print("cell stopEditing() called")
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.delegate?.onFinishEditing(in: self)
         self.stopEditing()
         return true
     }
