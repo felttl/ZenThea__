@@ -202,26 +202,60 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 
 
     /// fonction pour envoyer le message dans la view de manière interactive en objc
-    @objc func sendMessage() {
-        if let text : String = textField.text, !text.isEmpty {
-            self.convMsgs.addMessage(
-                Message(
-                    self.convMsgs.getCid(),
-                    self.convMsgs.getMid(),
-                    text,Date(),false
-                )
-            )
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            var convs = appDelegate.mediator.getConversations()
-            convs[self.convIdx!] = self.convMsgs
-            appDelegate.mediator.setConversations(convs)
-            appDelegate.mediator.save()
-            // Ajout de la nouvelle ligne au tableau
-            let newIndexPath = IndexPath(row: self.convMsgs.getMsgs().count - 1, section: 0)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-        }
-        textField.text = ""
+   @objc func sendMessage() {
+        guard let text = textField.text, !text.isEmpty else { return }
+        let userMessage = Message(self.convMsgs.getCid(), self.convMsgs.getMid(), text, Date(), false)
+        self.convMsgs.addMessageDAO(userMessage)
+    
+        tableView.reloadData()
         scrollToBottom()
+        textField.text = ""
+    
+        //recherche locale dans les documents avec le rag (embeddings + faiss)
+        if let results = RAGService.shared.rechercherDocuments(question: text) {
+            print("documents pertinents trouvés :", results)
+    
+            let pendingMessage = Message(self.convMsgs.getCid(), self.convMsgs.getMid(), "...", Date(), true)
+            self.convMsgs.addMessageDAO(pendingMessage)
+            self.tableView.reloadData()
+            self.scrollToBottom()
+    
+            //envoie la requête à l'api mistral avec les documents trouvés et l'historique de la onversation
+            APIService.shared.envoyerMessage(userId: "utilisateur_123", question: text, documents: results, conversation: self.convMsgs) { response in
+                DispatchQueue.main.async {
+                    if let response = response {
+                        //supprime le message temporaire avant d'ajouter la vraie réponse
+                        var messages = self.convMsgs.getMsgs()
+                        if !messages.isEmpty {
+                            messages.removeLast()
+                            self.convMsgs.setMsgs(messages)
+                        }
+    
+                        //ajoute la reponse de mistral dans la conversation
+                        let aiMessage = Message(self.convMsgs.getCid(), self.convMsgs.getMid(), response.reponseMistral, Date(), true)
+                        self.convMsgs.addMessageDAO(aiMessage)
+                    } else {
+                        print("aucune réponse de mistral")
+    
+                        //supprime le message temporaire et affiche un message d'erreur
+                        var messages = self.convMsgs.getMsgs()
+                        if !messages.isEmpty {
+                            messages.removeLast()
+                            self.convMsgs.setMsgs(messages)
+                        }
+    
+                        let errorMessage = Message(self.convMsgs.getCid(), self.convMsgs.getMid(), "erreur : impossible d'obtenir une réponse.", Date(), true)
+                        self.convMsgs.addMessageDAO(errorMessage)
+                    }
+    
+                    //recharge l'affichage
+                    self.tableView.reloadData()
+                    self.scrollToBottom()
+                }
+            }
+        } else {
+            print("aucunes informations trouvées")
+        }
     }
     
     /// tasse les messages vers le bas de la view
