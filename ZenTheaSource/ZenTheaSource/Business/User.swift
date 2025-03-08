@@ -19,7 +19,10 @@ class User: Codable{
     
     public func getSexe()->Sexe{return self.sexe}
     
-    public func setSexe(_ sexe: Sexe){self.sexe = sexe}
+    public func setSexe(_ sexe: Sexe){
+        self.sexe = sexe
+        UserDAO.writeJSON(self)
+    }
     
     
     

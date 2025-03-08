@@ -14,31 +14,32 @@ class ConversationsVC: UIViewController {
     @IBOutlet weak var stateIV: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
+    
+    public var conversations : [Conversation]!
     private var isUserModified : Bool = false
     private var isMsgsModified : Bool = false
     
+    
+
     // MARK: - Navigation
 
 
     /// l'utilisateur crée une conversation
-    @IBAction func addConv(_ sender: Any) {
+    @IBAction func ajouterConv(_ sender: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        var convs : [Conversation] = self.conversations
         let conv : Conversation = Conversation(
             "nouvelle conversation",
             Date()
         )
-        appDelegate.mediator.addConversation(conv)
+        convs.insert(conv, at: 0)
+        appDelegate.mediator.setConversations(convs)
         appDelegate.mediator.save()
-        let idx : Int = appDelegate.mediator.getConversations().count - 1
-        let newIndexPath = IndexPath(
-            row: idx,
-            section: 0
-        )
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
         self.performSegue(
             withIdentifier: "conv2Messages",
-            sender: idx
+            sender: conv.getCid()
         )
+        Conversation.setCid(Conversation.getCid()+1)
     }
     
     /// envoie les données dans une autre view
@@ -46,14 +47,10 @@ class ConversationsVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "conv2Messages" {
             if let destinationVC = segue.destination as? MessagesVC{
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                if let idx = sender as? Int{
-                    destinationVC.cid = appDelegate.mediator.getConversation(idx)?.getCid()
-                    destinationVC.convIdx = idx
-                }
+                destinationVC.cid = sender as? Int
             }
         } else {
-            print("error in ConversationsVC.prepare(): unknown segue id: (\(segue.identifier!))")
+            print("id de segue inconnu (\(segue.identifier!))")
         }
     }
     
@@ -61,12 +58,13 @@ class ConversationsVC: UIViewController {
     /// lorsque l'utilisateur selectionne une cellule on l'envoie dans la liste d'échanges
     /// on sauvegarde également l'état de l'utilisateur et les modification éventielles
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedConv : Conversation = self.conversations[indexPath.row]
         self.performSegue(
             withIdentifier: "conv2Messages",
-            sender: indexPath.row
+            sender: selectedConv.getCid()
         )
-//        let cell = tableView.cellForRow(at: indexPath) as! ConversationTVCell
-//        cell.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        let cell = tableView.cellForRow(at: indexPath) as! ConversationTVCell
+        cell.backgroundColor = UIColor.gray.withAlphaComponent(0.2)  // Assombrir légèrement
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -76,7 +74,7 @@ class ConversationsVC: UIViewController {
 
     
     /// lorsque l'utilisateur clique sur le segmented control
-    @IBAction func onChangeSex(_ sender: Any, forEvent event: UIEvent) {
+    @IBAction func onChangeSex(_ sender: UISegmentedControl){
         // si l'utilisateur existe ...
         // si l'utilisateur a modifié l'état de User...
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -93,11 +91,14 @@ class ConversationsVC: UIViewController {
     
 }
 extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, ConversationTVCellDelegate{
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.reloadData()
         self.tableView.estimatedRowHeight = 250
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.conversations = appDelegate.mediator.getConversations()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         // affichage de la connexion
@@ -116,9 +117,9 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
 
     /// vérifie que le serveur est connecté a l'application
     private func isConnected()->Bool{
-        var res : Bool = false
-        // a implémenter
-        return res
+       var res : Bool = false
+       // a implémenter
+       return res
     }
 
     /// lorsque l'utilisateur clique longtemps dessus il
@@ -127,26 +128,18 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         cell.startEditing()
     }
 
-    /// lorsque l'utilisateur a fini de modifier le titre
+    // lorsque l'utilisateur a fini de modifier le titre
     func onFinishEditing(in cell: ConversationTVCell) {
-        if let indexPath = tableView.indexPath(for: cell) {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let conv = appDelegate.mediator.getConversation(indexPath.row)
-            if let titleCell = cell.titleTF.text {
-                cell.titleL.text = titleCell
-                conv!.setTitle(titleCell)
-                appDelegate.mediator.setConversation(indexPath.row, conv!)
-                appDelegate.mediator.save()
-            }
-        }
-
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.mediator.setConversations(self.conversations)
+//        appDelegate.mediator.save()
+        print("onFinishEditing() called")
     }
 
     // MARK: - Table view data source
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.mediator.getConversations().count
+        return self.conversations.count
     }
     
     /// suppression d'une conversation au swipe horizontal (droite ver gauche)
@@ -154,9 +147,10 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         // manière simple de faire une suppression au swipe
         if editingStyle == .delete{
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.mediator.removeConv(at: indexPath.row)
+            self.conversations.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.mediator.setConversations(self.conversations)
             appDelegate.mediator.save()
         }
     }
@@ -167,10 +161,9 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
            withIdentifier: "conversationCell",
            for: indexPath
         ) as! ConversationTVCell
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let conversation : Conversation? = appDelegate.mediator.getConversation(indexPath.row)
-        cell.dateL.text = getFormattedDate(conversation!.getDate())
-        cell.titleL.text = conversation!.getTitle()
+        let conversation = self.conversations[indexPath.row]
+        cell.dateL.text = getFormattedDate(conversation.getDate())
+        cell.titleL.text = conversation.getTitle()
         cell.delegate = self
         cell.selectedBackgroundView = UIView()
         cell.accessoryType = .none
@@ -207,17 +200,6 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = .clear
     }
-    
-
-
-
-
-    
-
-
-
-
-    
     
 }
 

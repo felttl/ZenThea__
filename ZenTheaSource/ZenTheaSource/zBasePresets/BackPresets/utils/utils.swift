@@ -10,7 +10,7 @@ import Foundation
 /// recuperer la date formattée sous forme de chaine
 func getFormattedDate(_ date : Date? = Date(),_ isLocal:Bool=true)->String{
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm dd/MM/yyyy"
+    dateFormatter.dateFormat = "dd/MM/yyyy"
     if(isLocal){
         //= Locale(identifier: "fr_FR")
         dateFormatter.locale = Locale.current
@@ -30,5 +30,3 @@ func rechercheDichotomique(_ list: [AnyObject],_ searchFor: (AnyObject) -> Any)-
     // a implémenter
     return res
 }
-
-// quick sort (not generic)
