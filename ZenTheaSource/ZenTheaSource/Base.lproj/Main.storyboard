@@ -74,7 +74,7 @@
                                     <color key="baseForegroundColor" systemColor="systemGreenColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="ajouterConv:" destination="olw-YS-RcY" eventType="touchUpInside" id="Asv-mK-YGD"/>
+                                    <action selector="addConv:" destination="olw-YS-RcY" eventType="touchUpInside" id="Asv-mK-YGD"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="protoConnexion" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcg-ya-Th0">
