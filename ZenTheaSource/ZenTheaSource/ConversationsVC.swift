@@ -28,7 +28,6 @@ class ConversationsVC: UIViewController {
             Date()
         )
         appDelegate.mediator.addConversation(conv)
-        appDelegate.mediator.save()
         let idx : Int = appDelegate.mediator.getConversations().count - 1
         let newIndexPath = IndexPath(
             row: idx,
@@ -78,17 +77,12 @@ class ConversationsVC: UIViewController {
     /// lorsque l'utilisateur clique sur le segmented control
     @IBAction func onChangeSex(_ sender: Any, forEvent event: UIEvent) {
         // si l'utilisateur existe ...
-        // si l'utilisateur a modifié l'état de User...
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let user : User = appDelegate.mediator.getUser()
         let sexes : [Sexe] = [Sexe.homme,Sexe.femme,Sexe.autre]
-        if(self.sexeSC.selectedSegmentIndex != 0){
-            user.setSexe(sexes[self.sexeSC.selectedSegmentIndex])
-            appDelegate.mediator.setUser(user)
-        }
-
+        user.setSexe(sexes[self.sexeSC.selectedSegmentIndex])
+        appDelegate.mediator.setUser(user)
     }
-    
     
     
 }
@@ -96,6 +90,10 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.sexeSC.selectedSegmentIndex = [Sexe.homme,Sexe.femme,Sexe.autre].lastIndex(
+            of: appDelegate.mediator.getUser().getSexe()
+        )!
         self.tableView.reloadData()
         self.tableView.estimatedRowHeight = 250
         self.tableView.delegate = self
@@ -136,7 +134,6 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
                 cell.titleL.text = titleCell
                 conv!.setTitle(titleCell)
                 appDelegate.mediator.setConversation(indexPath.row, conv!)
-                appDelegate.mediator.save()
             }
         }
 
@@ -157,7 +154,6 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.mediator.removeConv(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            appDelegate.mediator.save()
         }
     }
 

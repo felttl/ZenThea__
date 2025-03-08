@@ -201,7 +201,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     private func loadMessages(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let conv : Conversation?
         if let conv = appDelegate.mediator.getConversation(self.convIdx){
             conv.setMsgs(Message.sortByDate(conv.getMsgs()))
             appDelegate.mediator.setConversation(
@@ -264,7 +263,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             conv.removeMsg(at: indexPath.row) // del dans la db
             tableView.deleteRows(at: [indexPath], with: .automatic) // del dans la view
             appDelegate.mediator.setConversation(indexPath.row,conv)
-            appDelegate.mediator.save()
         }
     }
     
@@ -285,7 +283,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             appDelegate.mediator.setConversation(
                 self.convIdx, conv
             )
-            appDelegate.mediator.save()
             // Ajout de la nouvelle ligne au tableau
             let newIndexPath = IndexPath(
                 row: conv.getMsgs().count - 1, section: 0

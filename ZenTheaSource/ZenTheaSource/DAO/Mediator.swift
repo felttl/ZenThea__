@@ -30,7 +30,7 @@ class Mediator{
     }
     // fonction appelé pour la sauvegarde en tache de fond
     public func save(){ // thread séparé
-        // sauvearde asynchrone
+        // sauvegarde asynchrone
         DispatchQueue.global(qos: .background).async {
             if self.conversations != nil {
                 ConversationDAO.writeJSON(self.conversations!)
@@ -46,10 +46,12 @@ class Mediator{
     
     public func addConversation(_ conv: Conversation){
         self.conversations?.append(conv)
+        self.save()
     }
     
     public func removeConv(at idx: Int){
         self.conversations?.remove(at: idx)
+        self.save()
     }
 
     
@@ -58,20 +60,24 @@ class Mediator{
     public func getUser()->User{
         return self.user!
     }
-    public func setUser(_ user: User){
-        self.user=user
-    }
     public func getConversations()->[Conversation]{
         return self.conversations ?? []
     }
     public func getConversation(_ index: Int)->Conversation?{
         return self.conversations?[index]
     }
+    
+    public func setUser(_ user: User){
+        self.user=user
+        self.save()
+    }
     public func setConversation(_ index: Int, _ conv: Conversation){
         self.conversations?[index]=conv
+        self.save()
     }
     public func setConversations(_ convs: [Conversation]){
         self.conversations=convs
+        self.save()
     }
     
     
