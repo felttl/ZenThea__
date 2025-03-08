@@ -17,13 +17,14 @@ class Conversation: Codable {
     // gérer les id des messages
     private var mid: Int = 0
     
-    private var msgs: [Message] = []
+    private var msgs: [Message]
         
     init(_ title: String,_ date: Date) {
         self.cid = Conversation.cid
         Conversation.cid += 1
         self.title = title
         self.date = date
+        self.msgs = []
     }
     
     public func addMessage(_ msg: Message){
@@ -45,6 +46,18 @@ class Conversation: Codable {
         self.msgs.remove(at: idx)
     }
     
+    
+    public func addConversation(){
+        
+    }
+    
+    public func removeMsg(at idx: Int){
+        self.msgs.remove(at: idx)
+    }
+    public func getMsg(at idx: Int)->Message{
+        return self.msgs[idx]
+    }
+    
     // MARK: getters & setters
 
     public func getCid()->Int{return self.cid}
@@ -63,25 +76,6 @@ class Conversation: Codable {
     public static func setCid(_ cid : Int){Conversation.cid=cid}
     
     
-    
-    /// renvoie un index en cherchant une cid de conversation
-    /// dans une liste de conversations
-    /// avec recherche dichotomique non réccursive
-    public static func getConversationIdx(_ convDAOs: [Conversation], _ cid: Int) -> Int? {
-        var res : Int? = nil
-        if !convDAOs.isEmpty{
-            var i = 0
-            var carry : Bool = true
-            while i < convDAOs.count && carry{
-                if(convDAOs[i].getCid() == cid){
-                    res = i
-                    carry = false
-                }
-                i+=1
-            }
-        }
-        return res
-    }    /// renvoie un index en cherchant une mid de message
     /// dans une liste de conversations
     /// avec recherche dichotomique non réccursive
     public static func getMessageIdx(_ msgs: [Message], _ mid: Int) -> Int? {
