@@ -19,7 +19,6 @@ class ConversationsVC: UIViewController {
     
     // MARK: - Navigation
 
-
     /// l'utilisateur crée une conversation
     @IBAction func addConv(_ sender: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -94,8 +93,6 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         self.sexeSC.selectedSegmentIndex = [Sexe.homme,Sexe.femme,Sexe.autre].lastIndex(
             of: appDelegate.mediator.getUser().getSexe()
         )!
-        self.tableView.reloadData()
-        self.tableView.estimatedRowHeight = 250
         self.tableView.delegate = self
         self.tableView.dataSource = self
         // affichage de la connexion
@@ -110,6 +107,7 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
                 red: 0.6, green: 0.3, blue: 0.23, alpha: 1.0
             )
         }
+        tableView.separatorStyle = .none
     }
 
     /// vérifie que le serveur est connecté a l'application
@@ -170,21 +168,6 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         cell.delegate = self
         cell.selectedBackgroundView = UIView()
         cell.accessoryType = .none
-        let disclosureImageView = UIImageView(image:
-            UIImage(systemName: "chevron.right")
-        )
-        disclosureImageView.translatesAutoresizingMaskIntoConstraints = false
-        disclosureImageView.tintColor = .systemGray
-        cell.contentView.addSubview(disclosureImageView)
-        NSLayoutConstraint.activate([
-            disclosureImageView.trailingAnchor.constraint(
-                equalTo: cell.contentView.trailingAnchor,
-                constant: -1
-            ),
-            disclosureImageView.centerYAnchor.constraint(
-                equalTo: cell.contentView.centerYAnchor
-            )
-        ])
         let spaceView = UIView(frame: CGRect(
             x: 0, y: 0,
             width: tableView.frame.width,
@@ -203,11 +186,6 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = .clear
     }
-    
-
-
-
-
     
 
 

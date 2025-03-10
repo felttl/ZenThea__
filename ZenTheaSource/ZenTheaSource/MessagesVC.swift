@@ -58,6 +58,15 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 //                }
 //            }
 //        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let conv = appDelegate.mediator.getConversation(self.convIdx)!
+        conv.addMessage(
+            Message(
+                conv.getCid(),
+                conv.getMid(),
+                "some text here",Date(),true
+            )
+        )
         // sort messages
         self.loadMessages()
         // on enregistre la cellule créer programmatiquement
@@ -262,7 +271,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             conv = appDelegate.mediator.getConversation(self.convIdx)!
             conv.removeMsg(at: indexPath.row) // del dans la db
             tableView.deleteRows(at: [indexPath], with: .automatic) // del dans la view
-            appDelegate.mediator.setConversation(indexPath.row,conv)
+            appDelegate.mediator.setConversation(self.convIdx,conv)
         }
     }
     
@@ -344,47 +353,9 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         let msg : Message = conv.getMsg(at: indexPath.row)
         cell.configure(
             with: msg.getLabel(),
-            date: getFormattedDate(msg.getDate())
+            date: getFormattedDate(msg.getDate()),
+            msg.getIsReceived()
         )
-        let ratio : CGFloat = 255.0
-        let safeRatio = ratio == 0 ? 1 : ratio // Évite la division par zéro
-        var color : UIColor?
-        if(msg.getIsReceived()){
-            // blue
-            color = UIColor(
-                red: 66.0/safeRatio,
-                green: 92.0/safeRatio,
-                blue: 237.0/safeRatio,
-                alpha: 1.0
-            )
-            NSLayoutConstraint.activate([
-                cell.bubbleImageView.leadingAnchor.constraint(
-                    equalTo: cell.contentView.leadingAnchor, constant: 15)
-            ])
-        } else { // gauche
-            // orange
-            color = UIColor(
-                red: 186.0/safeRatio,
-                green: 114.0/safeRatio,
-                blue: 6.0/safeRatio,
-                alpha: 1.0
-            )
-            // Positionner la bulle à droite
-            NSLayoutConstraint.activate([
-                cell.bubbleImageView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -15)
-            ])
-            
-        }
-        // 70% largeur max
-        NSLayoutConstraint.activate([
-            cell.bubbleImageView.widthAnchor.constraint(
-                equalTo: cell.contentView.widthAnchor, multiplier: 0.7
-            )
-        ])
-        cell.backgroundColor = .clear
-        cell.bubbleImageView.backgroundColor = color!
-        //cell.tintColor = color!
-        cell.selectionStyle = .none
         return cell
     }
     

@@ -21,11 +21,13 @@ class ConversationTVCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var dateL: UILabel!
     @IBOutlet weak var titleTF: UITextField!
     
+    @IBOutlet weak var subView: UIView!
+    
     var delegate : ConversationTVCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.roundCorner()
+        self.subView.roundCorner()
         self.titleTF.delegate = self
         self.stopEditing() // désactivé par défaut
         let longPressGR = UILongPressGestureRecognizer(
@@ -39,9 +41,8 @@ class ConversationTVCell: UITableViewCell, UITextFieldDelegate {
         super.layoutSubviews()
         // effet round border
         // Réappliquer les styles pour éviter les resets visuels
-        self.roundCorner()
+        self.subView.roundCorner()
     }
-
     
     /// lorsque l'utilisateur reste appuyé sur la cellule
     @objc private func handleLongPress(){
@@ -67,7 +68,7 @@ class ConversationTVCell: UITableViewCell, UITextFieldDelegate {
         self.titleL.isHidden = false
         self.titleTF.isHidden = true
         self.titleL.text = self.titleTF.text
-        self.roundCorner()
+        self.subView.roundCorner()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
