@@ -32,11 +32,14 @@ class ConversationsVC: UIViewController {
             row: idx,
             section: 0
         )
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
+
+        self.tableView.insertRows(at: [newIndexPath], with: .automatic)
         self.performSegue(
             withIdentifier: "conv2Messages",
             sender: idx
         )
+        self.tableView.reloadData()
+            
     }
     
     /// envoie les données dans une autre view
@@ -74,8 +77,7 @@ class ConversationsVC: UIViewController {
 
     
     /// lorsque l'utilisateur clique sur le segmented control
-    @IBAction func onChangeSex(_ sender: Any, forEvent event: UIEvent) {
-        // si l'utilisateur existe ...
+    @IBAction func onChangeSex(_ sender: Any, forEvent event: UIEvent){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let user : User = appDelegate.mediator.getUser()
         let sexes : [Sexe] = [Sexe.homme,Sexe.femme,Sexe.autre]
@@ -98,11 +100,15 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
         // affichage de la connexion
         if self.isConnected(){
             self.connectionStateL.text = "connecté"
-            self.stateIV.image = UIImage(systemName: "checkmark.circle.fill")
+            self.stateIV.image = UIImage(
+                systemName: "checkmark.circle.fill"
+            )
             self.stateIV.tintColor = .white
         } else {
             self.connectionStateL.text = "déconnecté"
-            self.stateIV.image = UIImage(systemName: "xmark.circle.fill")
+            self.stateIV.image = UIImage(
+                systemName: "xmark.circle.fill"
+            )
             self.stateIV.tintColor = UIColor(
                 red: 0.6, green: 0.3, blue: 0.23, alpha: 1.0
             )

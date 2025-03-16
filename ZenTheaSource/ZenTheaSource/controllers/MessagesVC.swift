@@ -58,16 +58,16 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 //        }
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let conv = appDelegate.mediator.getConversation(self.convIdx)!
-        conv.addMessage(
-            Message(
-                conv.getCid(),
-                conv.getMid(),
-                "some text here",Date(),true
-            )
-        )
+//        conv.addMessage(
+//            Message(
+//                conv.getCid(),
+//                conv.getMid(),
+//                "some text here",Date(),true
+//            )
+//        )
         // sort messages
         self.loadMessages()
-        // on enregistre la cellule créer programmatiquement
+        // on enregistre les cellules crées programmatiquement
         tableView.register(
             GMsgLTVCell.self,
             forCellReuseIdentifier: "GMsgLTVCell"
