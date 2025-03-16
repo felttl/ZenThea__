@@ -279,31 +279,31 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
 
 
-//    /// fonction pour envoyer le message dans la view de manière interactive en objc
-//    @objc func sendMessage() {
-//        if let text : String = textField.text, !text.isEmpty {
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            let conv = appDelegate.mediator.getConversation(self.convIdx)!
-//            conv.addMessage(
-//                Message(
-//                    conv.getCid(),
-//                    conv.getMid(),
-//                    text,Date(),false
-//                )
-//            )
-//            appDelegate.mediator.setConversation(
-//                self.convIdx, conv
-//            )
-//            // Ajout de la nouvelle ligne au tableau
-//            let newIndexPath = IndexPath(
-//                row: conv.getMsgs().count - 1, section: 0
-//            )
-//            tableView.insertRows(at: [newIndexPath], with: .automatic)
-//            textField.text = ""
-//            scrollToBottom()
-//        }
-//        
-//    }
+    /// fonction pour envoyer le message dans la view de manière interactive en objc
+    @objc func sendMessage() {
+        if let text : String = textField.text, !text.isEmpty {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let conv = appDelegate.mediator.getConversation(self.convIdx)!
+            conv.addMessage(
+                Message(
+                    conv.getCid(),
+                    conv.getMid(),
+                    text,Date(),false
+                )
+            )
+            appDelegate.mediator.setConversation(
+                self.convIdx, conv
+            )
+            // Ajout de la nouvelle ligne au tableau
+            let newIndexPath = IndexPath(
+                row: conv.getMsgs().count - 1, section: 0
+            )
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            textField.text = ""
+            scrollToBottom()
+        }
+        
+    }
 //    
 //    /// fonction pour envoyer le message dans la view de manière interactive en objc
 //    @objc func sendMessage() {
