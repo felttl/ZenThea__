@@ -24,10 +24,27 @@
 - il récupère ensuite la réponse et sauvegarde le tout localement
 
 ## Preview / appercut
+<table align="center" width="100%">
+    <thead>
+        <tr>
+            <th>
+                <img src="./imgs/preview/AppConv.png" alt="image non trouvée" height="100%" align="center"/>
+            </th>
+            <th>
+                <img src="./imgs/preview/AppMessage.png" alt="image non trouvée" height="100%" align="center"/>
+            </th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <img src="./imgs/preview/ViewTree.png" alt="image non trouvée" height="100%" align="center"/>
+            </td>
+        </tr>
+    </thead>
 
-![image non trouvée](./imgs/preview/AppConv.png)
-![image non trouvée](./imgs/preview/AppMessage.png)
-![image non trouvée](./imgs/preview/ViewTree.png)
+</table>
+
+
+
 
 
 ### design pattern utilisés
