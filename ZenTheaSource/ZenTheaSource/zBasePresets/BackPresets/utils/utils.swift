@@ -31,4 +31,9 @@ func rechercheDichotomique(_ list: [AnyObject],_ searchFor: (AnyObject) -> Any)-
     return res
 }
 
-// quick sort (not generic)
+/// color ration between 0 and 1 from color number (from 0 to 255)
+func colorRatio(_ colorValue: CGFloat)->CGFloat{
+    return colorValue/255.0
+}
+
+

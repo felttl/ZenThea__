@@ -8,8 +8,6 @@ import UIKit
 import Speech // .plist+: Privacy - Speech Recognition Usage Description
 
 class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, SFSpeechRecognizerDelegate {
-
-    
     
     // pour avoir plus de flexibilité on modifie tout
     // avec la prog pour avoir toutes les options
@@ -71,8 +69,12 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         self.loadMessages()
         // on enregistre la cellule créer programmatiquement
         tableView.register(
-            GMessageTVCell.self,
-            forCellReuseIdentifier: "MessageTVCellID"
+            GMsgLTVCell.self,
+            forCellReuseIdentifier: "GMsgLTVCell"
+        )
+        tableView.register(
+            GMsgRTVCell.self,
+            forCellReuseIdentifier: "GMsgRTVCell"
         )
         self.textField.becomeFirstResponder()
         self.setupInputView()
@@ -173,7 +175,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
            self.recognitionRequest?.append(buffer)
         }
-        audioEngine!.prepare()
+    audioEngine!.prepare()
         do {
            try audioEngine!.start()
         } catch {
@@ -344,19 +346,30 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: "MessageTVCellID",
-            for: indexPath
-        ) as! GMessageTVCell
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let conv = appDelegate.mediator.getConversation(self.convIdx)!
         let msg : Message = conv.getMsg(at: indexPath.row)
+        if(msg.getIsReceived()){
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "GMsgLTVCell",
+                for: indexPath
+            ) as! GMsgLTVCell
+            cell.configure(
+                with: msg.getLabel(),
+                date: getFormattedDate(msg.getDate())
+            )
+            return cell
+        }
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "GMsgRTVCell",
+            for: indexPath
+        ) as! GMsgRTVCell
         cell.configure(
             with: msg.getLabel(),
-            date: getFormattedDate(msg.getDate()),
-            msg.getIsReceived()
+            date: getFormattedDate(msg.getDate())
         )
         return cell
+
     }
     
     
