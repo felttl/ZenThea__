@@ -1,10 +1,6 @@
 # ZenThea
 
-
 ###### projet L3 nec UPPA
-<div width='100%'>
-    
-</div>
 <table align="center" width="100%">
     <thead>
         <tr>
