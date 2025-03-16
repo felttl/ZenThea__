@@ -26,7 +26,7 @@ class Conversation: Codable {
         self.date = date
     }
     
-    public func addMessageDAO(_ msg: Message){
+    public func addMessage(_ msg: Message){
         self.msgs.append(msg)
         self.mid += 1
     }
@@ -39,6 +39,18 @@ class Conversation: Codable {
         }
         return found
     }
+    
+    public func addConversation(){
+        
+    }
+    
+    public func removeMsg(at idx: Int){
+        self.msgs.remove(at: idx)
+    }
+    public func getMsg(at idx: Int)->Message{
+        return self.msgs[idx]
+    }
+    
     
     /// supprime un élément avec un index
     public func removeMessageIdx(_ idx: Int){
@@ -62,26 +74,6 @@ class Conversation: Codable {
     
     public static func setCid(_ cid : Int){Conversation.cid=cid}
     
-    
-    
-    /// renvoie un index en cherchant une cid de conversation
-    /// dans une liste de conversations
-    /// avec recherche dichotomique non réccursive
-    public static func getConversationIdx(_ convDAOs: [Conversation], _ cid: Int) -> Int? {
-        var res : Int? = nil
-        if !convDAOs.isEmpty{
-            var i = 0
-            var carry : Bool = true
-            while i < convDAOs.count && carry{
-                if(convDAOs[i].getCid() == cid){
-                    res = i
-                    carry = false
-                }
-                i+=1
-            }
-        }
-        return res
-    }    /// renvoie un index en cherchant une mid de message
     /// dans une liste de conversations
     /// avec recherche dichotomique non réccursive
     public static func getMessageIdx(_ msgs: [Message], _ mid: Int) -> Int? {
