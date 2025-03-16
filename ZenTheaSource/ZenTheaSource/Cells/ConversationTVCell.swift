@@ -68,7 +68,12 @@ class ConversationTVCell: UITableViewCell, UITextFieldDelegate {
         self.titleL.isHidden = false
         self.titleTF.isHidden = true
         self.titleL.text = self.titleTF.text
+<<<<<<< HEAD
         self.subView.roundCorner()
+=======
+        self.roundCorner()
+        print("cell stopEditing() called")
+>>>>>>> main
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -10,7 +10,7 @@ import Foundation
 /// recuperer la date formattée sous forme de chaine
 func getFormattedDate(_ date : Date? = Date(),_ isLocal:Bool=true)->String{
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm dd/MM/yyyy"
+    dateFormatter.dateFormat = "dd/MM/yyyy"
     if(isLocal){
         //= Locale(identifier: "fr_FR")
         dateFormatter.locale = Locale.current
@@ -30,6 +30,7 @@ func rechercheDichotomique(_ list: [AnyObject],_ searchFor: (AnyObject) -> Any)-
     // a implémenter
     return res
 }
+<<<<<<< HEAD
 
 /// color ration between 0 and 1 from color number (from 0 to 255)
 func colorRatio(_ colorValue: CGFloat)->CGFloat{
@@ -37,3 +38,5 @@ func colorRatio(_ colorValue: CGFloat)->CGFloat{
 }
 
 
+=======
+>>>>>>> main

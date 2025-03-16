@@ -28,7 +28,7 @@ class Mediator{
         }
         return Mediator.instance!
     }
-    // fonction appelé pour la sauvegarde en tache de fond
+    // fonction appelé pour la savegarde en tache de fond
     public func save(){ // thread séparé
         // sauvegarde asynchrone
         DispatchQueue.global(qos: .background).async {
@@ -44,6 +44,7 @@ class Mediator{
         }
     }
     
+<<<<<<< HEAD
     public func addConversation(_ conv: Conversation){
         self.conversations?.append(conv)
         self.save()
@@ -55,11 +56,14 @@ class Mediator{
     }
 
     
+=======
+>>>>>>> main
     //MARK: getters & setters
     
     public func getUser()->User{
         return self.user!
     }
+<<<<<<< HEAD
     public func getConversations()->[Conversation]{
         return self.conversations ?? []
     }
@@ -75,6 +79,14 @@ class Mediator{
         self.conversations?[index]=conv
         self.save()
     }
+=======
+    public func setUser(_ user: User){
+        self.user = user
+    }
+    public func getConversations()->[Conversation]{
+        return self.conversations ?? []
+    }
+>>>>>>> main
     public func setConversations(_ convs: [Conversation]){
         self.conversations=convs
         self.save()
