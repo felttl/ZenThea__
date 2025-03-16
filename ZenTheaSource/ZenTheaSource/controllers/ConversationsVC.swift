@@ -17,7 +17,7 @@ class ConversationsVC: UIViewController {
     // MARK: - Navigation
 
     /// l'utilisateur crée une conversation
-    @IBAction func ajouterConv(_ sender: Any) {
+    @IBAction func addConv(_ sender: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let conv : Conversation = Conversation(
             "nouvelle conversation",
