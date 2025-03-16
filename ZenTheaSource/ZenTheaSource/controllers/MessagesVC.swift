@@ -277,102 +277,86 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         }
     }
     
-
-
+    
     /// fonction pour envoyer le message dans la view de manière interactive en objc
     @objc func sendMessage() {
-        if let text : String = textField.text, !text.isEmpty {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let conv = appDelegate.mediator.getConversation(self.convIdx)!
-            conv.addMessage(
-                Message(
-                    conv.getCid(),
-                    conv.getMid(),
-                    text,Date(),false
-                )
+        guard let text = textField.text, !text.isEmpty else { return }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let conv = appDelegate.mediator.getConversation(self.convIdx)!
+        conv.addMessage(
+            Message(
+                conv.getCid(),
+                conv.getMid(),
+                text,Date(),false
             )
-            appDelegate.mediator.setConversation(
-                self.convIdx, conv
+        )
+
+        tableView.reloadData()
+        scrollToBottom()
+        textField.text = ""
+
+        //récupérer le sexe de l'utilisateur
+
+        let user = appDelegate.mediator.getUser()
+        let sexe = user.getSexe()
+
+        //recherche locale dans les documents avec le rag (embeddings + faiss)
+        if let results = RAGService.shared.rechercherDocuments(question: text) {
+            print("documents pertinents trouvés :", results)
+            let pendingMessage = Message(
+                conv.getCid(),
+                conv.getMid(),
+                "...",Date(),true
             )
-            // Ajout de la nouvelle ligne au tableau
-            let newIndexPath = IndexPath(
-                row: conv.getMsgs().count - 1, section: 0
-            )
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-            textField.text = ""
-            scrollToBottom()
+            conv.addMessage(pendingMessage)
+            self.tableView.reloadData()
+            self.scrollToBottom()
+            //envoie la requête à mistral avec les documents trouvés, l'historique et le sexe
+            APIService.shared.envoyerMessage(userId: "utilisateur_123", question: text, documents: results, conversation: conv, sexe: sexe) { response in
+                DispatchQueue.main.async {
+                    if let response = response {
+                        //supprime le message temporaire avant d'ajouter la vraie réponse
+                        var messages = conv.getMsgs()
+                        if !messages.isEmpty {
+                            messages.removeLast()
+                            conv.setMsgs(messages)
+                        }
+
+                        //ajoute la réponse de mistral dans la conversation
+                        let aiMessage = Message(
+                            conv.getCid(),
+                            conv.getMid(),
+                            response.reponseMistral,
+                            Date(),true
+                        )
+                        conv.addMessage(aiMessage)
+                    } else {
+                        print("aucune réponse de mistral")
+
+                        //supprime le message temporaire et affiche un message d'erreur
+                        var messages = conv.getMsgs()
+                        if !messages.isEmpty {
+                            messages.removeLast()
+                            conv.setMsgs(messages)
+                        }
+                        let errorMessage = Message(
+                            conv.getCid(),
+                            conv.getMid(),
+                            "erreur : impossible d'obtenir une réponse.",
+                            Date(),true
+                        )
+                        conv.addMessage(errorMessage)
+                    }
+
+                    //recharge l'affichage
+                    self.tableView.reloadData()
+                    self.scrollToBottom()
+                }
+            }
+        } else {
+            print("aucunes informations trouvées")
         }
-        
     }
-//    
-//    /// fonction pour envoyer le message dans la view de manière interactive en objc
-//    @objc func sendMessage() {
-//        guard let text = textField.text, !text.isEmpty else { return }
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let conv = appDelegate.mediator.getConversation(self.convIdx)!
-//        conv.addMessage(
-//            Message(
-//                conv.getCid(),
-//                conv.getMid(),
-//                text,Date(),false
-//            )
-//        )
-//
-//        tableView.reloadData()
-//        scrollToBottom()
-//        textField.text = ""
-//
-//        //récupérer le sexe de l'utilisateur
-//
-//        let user = appDelegate.mediator.getUser()
-//        let sexe = user.getSexe()
-//
-//        //recherche locale dans les documents avec le rag (embeddings + faiss)
-//        if let results = RAGService.shared.rechercherDocuments(question: text) {
-//            print("documents pertinents trouvés :", results)
-//
-//            let pendingMessage = Message(self.convMsgs.getCid(), self.convMsgs.getMid(), "...", Date(), true)
-//            self.convMsgs.addMessageDAO(pendingMessage)
-//            self.tableView.reloadData()
-//            self.scrollToBottom()
-//
-//            //envoie la requête à mistral avec les documents trouvés, l'historique et le sexe
-//            APIService.shared.envoyerMessage(userId: "utilisateur_123", question: text, documents: results, conversation: self.convMsgs, sexe: sexe) { response in
-//                DispatchQueue.main.async {
-//                    if let response = response {
-//                        //supprime le message temporaire avant d'ajouter la vraie réponse
-//                        var messages = self.convMsgs.getMsgs()
-//                        if !messages.isEmpty {
-//                            messages.removeLast()
-//                            self.convMsgs.setMsgs(messages)
-//                        }
-//
-//                        //ajoute la réponse de mistral dans la conversation
-//                        let aiMessage = Message(self.convMsgs.getCid(), self.convMsgs.getMid(), response.reponseMistral, Date(), true)
-//                        self.convMsgs.addMessageDAO(aiMessage)
-//                    } else {
-//                        print("aucune réponse de mistral")
-//
-//                        //supprime le message temporaire et affiche un message d'erreur
-//                        var messages = self.convMsgs.getMsgs()
-//                        if !messages.isEmpty {
-//                            messages.removeLast()
-//                            self.convMsgs.setMsgs(messages)
-//                        }
-//
-//                        let errorMessage = Message(self.convMsgs.getCid(), self.convMsgs.getMid(), "erreur : impossible d'obtenir une réponse.", Date(), true)
-//                        self.convMsgs.addMessageDAO(errorMessage)
-//                    }
-//
-//                    //recharge l'affichage
-//                    self.tableView.reloadData()
-//                    self.scrollToBottom()
-//                }
-//            }
-//        } else {
-//            print("aucunes informations trouvées")
-//        }
-//    }
     
     /// tasse les messages vers le bas de la view
     func scrollToBottom() {
