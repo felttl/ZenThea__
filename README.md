@@ -8,7 +8,7 @@ projet de bot conversationnel avec un LLM distant (serveur)
 ## fonctionnement
 
 - l'utilisateur créer des conversations
-- l'utilisateur envoie des message au bot (envoie via le réseau)
+- l'utilisateur envoie des message au bot (envoie via le réseau ou non)
 - il récupère ensuite la réponse et sauvegarde le tout localement
 
 ### design pattern utilisés
@@ -20,4 +20,4 @@ projet de bot conversationnel avec un LLM distant (serveur)
 
 ### autres informations
 
-- LLM
+- LLM avec Mistral
