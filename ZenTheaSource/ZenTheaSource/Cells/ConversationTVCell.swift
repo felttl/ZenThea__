@@ -68,7 +68,6 @@ class ConversationTVCell: UITableViewCell, UITextFieldDelegate {
         self.titleL.isHidden = false
         self.titleTF.isHidden = true
         self.titleL.text = self.titleTF.text
-        self.subView.roundCorner()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

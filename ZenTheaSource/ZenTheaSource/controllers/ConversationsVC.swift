@@ -14,13 +14,10 @@ class ConversationsVC: UIViewController {
     @IBOutlet weak var stateIV: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    private var isUserModified : Bool = false
-    private var isMsgsModified : Bool = false
-    
     // MARK: - Navigation
 
     /// l'utilisateur crée une conversation
-    @IBAction func addConv(_ sender: Any) {
+    @IBAction func ajouterConv(_ sender: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let conv : Conversation = Conversation(
             "nouvelle conversation",
@@ -55,7 +52,6 @@ class ConversationsVC: UIViewController {
             }
         } else {
             print("error in ConversationsVC.prepare(): unknown segue id: (\(segue.identifier!))")
-        }
     }
     
     
@@ -192,12 +188,6 @@ extension ConversationsVC: UITableViewDataSource, UITableViewDelegate, Conversat
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = .clear
     }
-    
-
-
-
-
-    
     
 }
 
