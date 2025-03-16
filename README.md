@@ -5,7 +5,7 @@
     <thead>
         <tr>
             <th>
-                <img src="./imgs/ZTiconSC.png" alt="image non trouvée" height="200px" align="center"/>
+                <img src="./imgs/ZTiconSC.png" alt="image non trouvée" height="100%" align="center"/>
             </th>
             <th>
                 projet de bot conversationnel avec un LLM distant (serveur) et/ou local
